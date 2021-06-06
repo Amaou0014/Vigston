@@ -1,0 +1,7 @@
+﻿  main.cpp
+C:\Users\toydo\Desktop\Vigston\Vigston\main.cpp(17,5): warning C4007: 'WinMain': '__stdcall' でなければなりません。
+C:\Users\toydo\Desktop\Vigston\Vigston\main.cpp(24,25): warning C4302: '型キャスト': 'LPWSTR' から 'WORD' へ切り詰めます。
+C:\Users\toydo\Desktop\Vigston\Vigston\main.cpp(25,27): warning C4302: '型キャスト': 'LPWSTR' から 'WORD' へ切り詰めます。
+  vigston.cpp
+  コードを生成中...
+  Vigston.vcxproj -> C:\Users\toydo\Desktop\Vigston\Debug\Vigston.exe
