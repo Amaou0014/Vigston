@@ -32,6 +32,4 @@ public:
 	void Start();
 	// –ˆƒtƒŒ[ƒ€ŒÄ‚Î‚ê‚é
 	void Update();
-
-	void WindowCreate(const char* name, int width, int height);
 };

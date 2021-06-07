@@ -1,7 +1,23 @@
-﻿  main.cpp
-C:\Users\toydo\Desktop\Vigston\Vigston\main.cpp(17,5): warning C4007: 'WinMain': '__stdcall' でなければなりません。
-C:\Users\toydo\Desktop\Vigston\Vigston\main.cpp(24,25): warning C4302: '型キャスト': 'LPWSTR' から 'WORD' へ切り詰めます。
-C:\Users\toydo\Desktop\Vigston\Vigston\main.cpp(25,27): warning C4302: '型キャスト': 'LPWSTR' から 'WORD' へ切り詰めます。
+﻿  direct3d.cpp
+C:\Users\toydo\OneDrive\ドキュメント\GitHub\Vigston\Vigston\Vigston\direct3d.cpp(24,3): warning C4838: 'int' から 'UINT' への変換には縮小変換が必要です
+C:\Users\toydo\OneDrive\ドキュメント\GitHub\Vigston\Vigston\Vigston\direct3d.cpp(24,9): warning C4838: 'int' から 'UINT' への変換には縮小変換が必要です
+  directsound.cpp
+  main.cpp
+C:\Users\toydo\OneDrive\ドキュメント\GitHub\Vigston\Vigston\Vigston\main.cpp(17,5): warning C4007: 'WinMain': '__stdcall' でなければなりません。
+C:\Users\toydo\OneDrive\ドキュメント\GitHub\Vigston\Vigston\Vigston\main.cpp(24,25): warning C4302: '型キャスト': 'LPWSTR' から 'WORD' へ切り詰めます。
+C:\Users\toydo\OneDrive\ドキュメント\GitHub\Vigston\Vigston\Vigston\main.cpp(25,27): warning C4302: '型キャスト': 'LPWSTR' から 'WORD' へ切り詰めます。
+  soundbuffer.cpp
+  sprite.cpp
+C:\Users\toydo\OneDrive\ドキュメント\GitHub\Vigston\Vigston\Vigston\sprite.cpp(114,11): warning C4244: '初期化中': 'double' から 'float' への変換です。データが失われる可能性があります。
+C:\Users\toydo\OneDrive\ドキュメント\GitHub\Vigston\Vigston\Vigston\sprite.cpp(115,11): warning C4244: '初期化中': 'double' から 'float' への変換です。データが失われる可能性があります。
+C:\Users\toydo\OneDrive\ドキュメント\GitHub\Vigston\Vigston\Vigston\sprite.cpp(133,10): warning C4244: '初期化中': 'double' から 'float' への変換です。データが失われる可能性があります。
+C:\Users\toydo\OneDrive\ドキュメント\GitHub\Vigston\Vigston\Vigston\sprite.cpp(140,10): warning C4244: '=': 'double' から 'float' への変換です。データが失われる可能性があります。
+C:\Users\toydo\OneDrive\ドキュメント\GitHub\Vigston\Vigston\Vigston\sprite.cpp(147,10): warning C4244: '=': 'double' から 'float' への変換です。データが失われる可能性があります。
+C:\Users\toydo\OneDrive\ドキュメント\GitHub\Vigston\Vigston\Vigston\sprite.cpp(154,10): warning C4244: '=': 'double' から 'float' への変換です。データが失われる可能性があります。
+  text.cpp
+  texture.cpp
   vigston.cpp
+  wave.cpp
   コードを生成中...
-  Vigston.vcxproj -> C:\Users\toydo\Desktop\Vigston\Debug\Vigston.exe
+  LINK : 前回のインクリメンタル リンクで C:\Users\toydo\OneDrive\ドキュメント\GitHub\Vigston\Vigston\Debug\Vigston.exe が見つからなかったか、ビルドされませんでした。フル リンクを行います。
+  Vigston.vcxproj -> C:\Users\toydo\OneDrive\ドキュメント\GitHub\Vigston\Vigston\Debug\Vigston.exe
