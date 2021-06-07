@@ -15,10 +15,14 @@ public:
 	Direct3D	direct3d;
 	DirectSound	directsound;
 
+	Texture texture;
+
 	Texture tex_slime;
 
-	Sprite sprite[2];
+	//Sprite sprite[2];
 
+	Sprite sprite;
+	Sprite sprite1;
 
 	const TCHAR* WC_BASIC = _T("BASIC_WINDOW");
 	WNDCLASSEX wcex;
@@ -36,5 +40,7 @@ public:
 	// Update‚Ì‘O‚Éˆê‰ñ‚¾‚¯ŒÄ‚Î‚ê‚é
 	void Start();
 	// –ˆƒtƒŒ[ƒ€ŒÄ‚Î‚ê‚é
-	virtual void Update();
+	void Update();
+
+	bool LoadTexture(TCHAR* name, Texture* texture);
 };
