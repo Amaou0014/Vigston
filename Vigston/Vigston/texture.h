@@ -2,7 +2,6 @@
 
 #include "direct3d.h"
 
-
 // テクスチャクラス
 class Texture
 {
@@ -13,5 +12,5 @@ public:
 	// デストラクタ
 	~Texture();
 	// 画像データ読み込み
-	bool Load(const char* name);
+	bool Load(IDirect3DDevice9* pDevice3D, TCHAR* FileName);
 };
