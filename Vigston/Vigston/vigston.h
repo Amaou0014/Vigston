@@ -17,12 +17,7 @@ public:
 
 	Texture texture;
 
-	Texture tex_slime;
-
-	//Sprite sprite[2];
-
 	Sprite sprite;
-	Sprite sprite1;
 
 	const TCHAR* WC_BASIC = _T("BASIC_WINDOW");
 	WNDCLASSEX wcex;
@@ -42,5 +37,9 @@ public:
 	// 毎フレーム呼ばれる
 	void Update();
 
+	// 画像読み込み
 	bool LoadTexture(TCHAR* name, Texture* texture);
+
+	// 描画位置セット
+	void SetSprite(float x, float y, int width, int height, float rotate, Sprite* sprite);
 };

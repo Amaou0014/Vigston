@@ -21,14 +21,9 @@ void Vigston::Init(HWND hWnd)
 
 void Vigston::Start()
 {
-	tex_slime.Load(direct3d.pDevice3D, (TCHAR*)_T("Resources/Slime.png"));
 	LoadTexture((TCHAR*)_T("Resources/Slime.png"), &texture);
 
-	sprite.SetPos(100, 100);
-	sprite.SetWidth(128, 128);
-
-	sprite1.SetPos(300, 300);
-	sprite1.SetWidth(128, 128);
+	SetSprite(100, 100, 128, 128, 0, &sprite);
 }
 
 // メインループ
@@ -45,8 +40,6 @@ void Vigston::Update()
 		// スプライト描画
 
 		sprite.Draw(direct3d.pDevice3D, texture.pTexture);
-
-		sprite1.Draw(direct3d.pDevice3D, tex_slime.pTexture);
 
 		// 描画終了
 		direct3d.pDevice3D->EndScene();
@@ -67,4 +60,11 @@ bool Vigston::LoadTexture(TCHAR* _name, Texture* _texture)
 		// 読み込み失敗
 		return false;
 	}
+}
+
+void Vigston::SetSprite(float x, float y, int width, int height, float rotate, Sprite* _sprite)
+{
+	_sprite->SetPos(x, y);
+	_sprite->SetWidth(width, height);
+	_sprite->SetRotate(rotate);
 }
