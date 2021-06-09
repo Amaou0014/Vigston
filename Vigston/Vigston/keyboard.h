@@ -2,6 +2,7 @@
 
 #include <Windows.h>
 
+
 static bool flg_push = false;
 static bool flg_release = false;
 

@@ -1,9 +1,11 @@
 #include "sprite.h"
 
+
 // コンストラクタ
 Sprite::Sprite()
 {
-	pos.x = pos.y = 0.0f;
+	pos.x = 0.0f;
+	pos.y = 0.0f;
 	width = 0;
 	height = 0;
 	divU = 1;

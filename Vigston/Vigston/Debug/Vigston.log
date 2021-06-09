@@ -1,9 +1,2 @@
-﻿  keyboard.cpp
-  main.cpp
-C:\Users\toydo\OneDrive\ドキュメント\GitHub\Vigston\Vigston\Vigston\main.cpp(17,5): warning C4007: 'WinMain': '__stdcall' でなければなりません。
-C:\Users\toydo\OneDrive\ドキュメント\GitHub\Vigston\Vigston\Vigston\main.cpp(24,25): warning C4302: '型キャスト': 'LPWSTR' から 'WORD' へ切り詰めます。
-C:\Users\toydo\OneDrive\ドキュメント\GitHub\Vigston\Vigston\Vigston\main.cpp(25,27): warning C4302: '型キャスト': 'LPWSTR' から 'WORD' へ切り詰めます。
-  vigston.cpp
-  コードを生成中...
-C:\Users\toydo\OneDrive\ドキュメント\GitHub\Vigston\Vigston\Vigston\keyboard.cpp(28): warning C4715: 'PushKey': 値を返さないコントロール パスがあります。
+﻿  vigston.cpp
   Vigston.vcxproj -> C:\Users\toydo\OneDrive\ドキュメント\GitHub\Vigston\Vigston\Debug\Vigston.exe

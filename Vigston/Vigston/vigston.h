@@ -17,8 +17,10 @@ public:
 	DirectSound	directsound;
 
 	Texture texture;
-
 	Sprite sprite;
+
+	Wave wave;
+	SoundBuffer sb;
 
 	bool flag = false;
 
@@ -42,6 +44,9 @@ public:
 
 	// 画像読み込み
 	bool LoadTexture(TCHAR* name, Texture* texture);
+
+	// 音声読み込み
+	bool LoadSound(TCHAR* name, Wave* wave, SoundBuffer* sb);
 
 	// 描画位置セット
 	void SetSprite(float x, float y, int width, int height, float rotate, Sprite* sprite);

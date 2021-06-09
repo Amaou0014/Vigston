@@ -1,8 +1,7 @@
 #pragma once
 
-// DirectSoundの各種ヘッダーのインクルードが必要なため
-// すでにまとめてあるヘッダーをインクルードする
 #include "directsound.h"
+
 
 class Wave{
 public:

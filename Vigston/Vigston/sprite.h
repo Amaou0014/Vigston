@@ -2,6 +2,7 @@
 
 #include "direct3d.h"
 
+
 struct AnimationNum{
 	unsigned int numU;
 	unsigned int numV;

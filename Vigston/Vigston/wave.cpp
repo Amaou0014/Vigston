@@ -1,5 +1,7 @@
 #define _CRT_SECURE_NO_WARNINGS
+
 #include "wave.h"
+
 
 Wave::Wave()
 {
@@ -14,9 +16,6 @@ Wave::~Wave()
 		delete[] WaveData;
 }
 
-
-
-// Wavƒtƒ@ƒCƒ‹“Ç‚İ‚İ
 bool Wave::Load(TCHAR* FileName)
 {
 

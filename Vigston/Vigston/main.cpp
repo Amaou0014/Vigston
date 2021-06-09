@@ -1,5 +1,6 @@
 #include "vigston.h"
 
+
 // メッセージ処理
 LRESULT CALLBACK WndProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam) {
 
