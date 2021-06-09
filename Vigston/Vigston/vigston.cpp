@@ -22,6 +22,7 @@ void Vigston::Init(HWND hWnd)
 void Vigston::Start()
 {
 	LoadTexture((TCHAR*)_T("Resources/Slime.png"), &texture);
+	LoadSound((TCHAR*)_T("Resources/maou _retoro_1.wav"), &wave, &sb);
 
 	SetSprite(100, 100, 128, 128, 0, &sprite);
 }
@@ -58,10 +59,12 @@ void Vigston::Update()
 
 		if (PushKey('T'))
 		{
+			sb.Play(false);
 			sprite.UpdateRotate(10);
 		}
 		if (ReleaseKey('T'))
 		{
+			sb.Play(false);
 			sprite.UpdateRotate(-10);
 		}
 
@@ -76,14 +79,18 @@ void Vigston::Update()
 
 bool Vigston::LoadTexture(TCHAR* _name, Texture* _texture)
 {
-	if (_texture->Load(direct3d.pDevice3D, _name))
+	return _texture->Load(direct3d.pDevice3D, _name);
+}
+
+bool Vigston::LoadSound(TCHAR* name, Wave* wave, SoundBuffer* sb)
+{
+	if (wave->Load(name) &&
+		sb->Create(directsound.pDirectSound8, wave->WaveFormat, wave->WaveData, wave->DataSize))
 	{
-		// “Ç‚İ‚İ¬Œ÷
 		return true;
 	}
 	else
 	{
-		// “Ç‚İ‚İ¸”s
 		return false;
 	}
 }
