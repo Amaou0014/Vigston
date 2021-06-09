@@ -7,6 +7,7 @@
 #include "directsound.h"
 #include "wave.h"
 #include "soundbuffer.h"
+#include "keyboard.h"
 
 
 class Vigston
@@ -18,6 +19,8 @@ public:
 	Texture texture;
 
 	Sprite sprite;
+
+	bool flag = false;
 
 	const TCHAR* WC_BASIC = _T("BASIC_WINDOW");
 	WNDCLASSEX wcex;

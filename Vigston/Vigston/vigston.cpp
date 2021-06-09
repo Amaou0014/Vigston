@@ -39,6 +39,32 @@ void Vigston::Update()
 		// ↓ここに各プログラムを動かす↓
 		// スプライト描画
 
+		if (GetKey('W'))
+		{
+			sprite.UpdatePos(0,-1);
+		}
+		if (GetKey('A'))
+		{
+			sprite.UpdatePos(-1, 0);
+		}
+		if (GetKey('S'))
+		{
+			sprite.UpdatePos(0, 1);
+		}
+		if (GetKey('D'))
+		{
+			sprite.UpdatePos(1, 0);
+		}
+
+		if (PushKey('T'))
+		{
+			sprite.UpdateRotate(10);
+		}
+		if (ReleaseKey('T'))
+		{
+			sprite.UpdateRotate(-10);
+		}
+
 		sprite.Draw(direct3d.pDevice3D, texture.pTexture);
 
 		// 描画終了
