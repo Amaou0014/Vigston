@@ -22,7 +22,7 @@ void Vigston::Init(HWND hWnd)
 void Vigston::Start()
 {
 	LoadTexture((TCHAR*)_T("Resources/Slime.png"), &texture);
-	LoadSound((TCHAR*)_T("Resources/maou _retoro_1.wav"), &wave, &sb);
+	LoadSound((TCHAR*)_T("Resources/maou_retoro_1.wav"), &wave_retoro1, &sb_retolo1);
 
 	SetSprite(100, 100, 128, 128, 0, &sprite);
 }
@@ -40,31 +40,31 @@ void Vigston::Update()
 		// ↓ここに各プログラムを動かす↓
 		// スプライト描画
 
-		if (GetKey('W'))
+		if (keyboard.GetKey('W'))
 		{
 			sprite.UpdatePos(0,-1);
 		}
-		if (GetKey('A'))
+		if (keyboard.GetKey('A'))
 		{
 			sprite.UpdatePos(-1, 0);
 		}
-		if (GetKey('S'))
+		if (keyboard.GetKey('S'))
 		{
 			sprite.UpdatePos(0, 1);
 		}
-		if (GetKey('D'))
+		if (keyboard.GetKey('D'))
 		{
 			sprite.UpdatePos(1, 0);
 		}
 
-		if (PushKey('T'))
+		if (keyboard.PushKey('T'))
 		{
-			sb.Play(false);
+			sb_retolo1.Play(false);
 			sprite.UpdateRotate(10);
 		}
-		if (ReleaseKey('T'))
+		if (keyboard.ReleaseKey('T'))
 		{
-			sb.Play(false);
+			sb_retolo1.Play(false);
 			sprite.UpdateRotate(-10);
 		}
 
@@ -93,6 +93,11 @@ bool Vigston::LoadSound(TCHAR* name, Wave* wave, SoundBuffer* sb)
 	{
 		return false;
 	}
+}
+
+void Vigston::ChangeVolume(long _volume, SoundBuffer* sb)
+{
+	sb->ChangeVolume(_volume);
 }
 
 void Vigston::SetSprite(float x, float y, int width, int height, float rotate, Sprite* _sprite)
