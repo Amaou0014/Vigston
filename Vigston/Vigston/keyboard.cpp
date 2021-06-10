@@ -1,18 +1,18 @@
 #include "keyboard.h"
 
 
-bool GetKey(int key)
+bool Keyboard::GetKey(int key)
 {
 	return GetAsyncKeyState(key);
 }
 
-bool PushKey(int key)
+bool Keyboard::PushKey(int key)
 {
 	if (GetAsyncKeyState(key))
 	{
-		if (!flg_push)
+		if (!flg_p)
 		{
-			flg_push = true;
+			flg_p = true;
 
 			return true;
 		}
@@ -23,26 +23,26 @@ bool PushKey(int key)
 	}
 	else
 	{
-		flg_push = false;
+		flg_p = false;
 	}
 }
 
-bool ReleaseKey(int key)
+bool Keyboard::ReleaseKey(int key)
 {
 	if (GetAsyncKeyState(key))
 	{
-		flg_release = true;
+		flg_r = true;
 		return false;
 	}
 	else
 	{
-		if (!flg_release)
+		if (!flg_r)
 		{
 			return false;
 		}
 		else
 		{
-			flg_release = false;
+			flg_r = false;
 			return true;
 		}
 	}

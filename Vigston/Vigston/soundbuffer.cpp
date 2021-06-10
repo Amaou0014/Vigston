@@ -57,7 +57,6 @@ bool SoundBuffer::Create(IDirectSound8*	pDirectSound8,WAVEFORMATEX& WaveFormat,b
 
 void SoundBuffer::Play(bool isLoop)
 {
-	// ƒTƒEƒ“ƒhÄ¶
 	if(pSecondaryBuffer != NULL){
 		DWORD LoopFlag = (isLoop ? DSBPLAY_LOOPING : 0);
 		pSecondaryBuffer->Play(0,0,LoopFlag);
@@ -65,6 +64,25 @@ void SoundBuffer::Play(bool isLoop)
 }
 void SoundBuffer::Stop()
 {
-	if(pSecondaryBuffer != NULL)
+	if (pSecondaryBuffer != NULL)
+	{
 		pSecondaryBuffer->Stop();
+	}
+}
+
+void SoundBuffer::ChangeVolume(long _volume)
+{
+	if (pSecondaryBuffer != NULL)
+	{
+		pSecondaryBuffer->SetVolume((LONG)_volume);
+	}
+}
+
+long SoundBuffer::GetVolume(long _volume)
+{
+	if (pSecondaryBuffer != NULL)
+	{
+		pSecondaryBuffer->GetVolume((LPLONG)_volume);
+		return _volume;
+	}
 }
