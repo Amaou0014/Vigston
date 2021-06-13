@@ -18,7 +18,6 @@ public:
 
 	Texture texture;
 	Sprite sprite;
-	Keyboard keyboard;
 
 	Wave wave_retoro1;
 	SoundBuffer sb_retolo1;
@@ -36,8 +35,13 @@ public:
 
 	HWND hWnd;
 
+	DWORD backColor;
+
 	Vigston();
 	~Vigston();
+
+	//この関数の中に処理を書いてね
+	/////////////////////////////////
 
 	// 初期化
 	void Init(HWND hWnd);
@@ -46,16 +50,33 @@ public:
 	// 毎フレーム呼ばれる
 	void Update();
 
+	/////////////////////////////////
+
+	// 背景色セット(十六進数)
+	void Set_BackColor(unsigned int color);
+
+	// 画面リセット
+	void Clear_Screen();
+
+	// レンダリング開始
+	bool Begine_Scene();
+	// レンダリング終了
+	bool End_Scene();
+
 	// 画像読み込み
-	bool LoadTexture(TCHAR* name, Texture* texture);
+	bool Load_Texture(TCHAR* name, Texture* texture);
 
 	// 音声読み込み
-	bool LoadSound(TCHAR* name, Wave* wave, SoundBuffer* sb);
+	bool Load_Sound(TCHAR* name, Wave* wave, SoundBuffer* sb);
+	// 音声再生
+	void Play_Sound(bool isLoop, SoundBuffer* sb);
 	// 音量変更
-	void SetVolume(long _volume, SoundBuffer* sb);
+	void Set_Volume(long _volume, SoundBuffer* sb);
 	// 音量取得
-	long GetVolume(SoundBuffer* sb);
+	long Get_Volume(SoundBuffer* sb);
 
 	// 描画位置セット
-	void SetSprite(float x, float y, int width, int height, float rotate, Sprite* sprite);
+	void Set_Sprite(float x, float y, int width, int height, float rotate, Sprite* sprite);
+	// 描画位置を動かす
+	void Move_Sprite(float x, float y, float rotate, Sprite* sprite);
 };
