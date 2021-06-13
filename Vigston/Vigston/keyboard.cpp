@@ -1,12 +1,12 @@
 #include "keyboard.h"
 
 
-bool Keyboard::GetKey(int key)
+bool GetKey(int key)
 {
 	return GetAsyncKeyState(key);
 }
 
-bool Keyboard::PushKey(int key)
+bool PushKey(int key)
 {
 	if (GetAsyncKeyState(key))
 	{
@@ -27,7 +27,7 @@ bool Keyboard::PushKey(int key)
 	}
 }
 
-bool Keyboard::ReleaseKey(int key)
+bool ReleaseKey(int key)
 {
 	if (GetAsyncKeyState(key))
 	{

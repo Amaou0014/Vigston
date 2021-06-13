@@ -1,2 +1,8 @@
-﻿  vigston.cpp
+﻿  main.cpp
+C:\Users\toydo\OneDrive\ドキュメント\GitHub\Vigston\Vigston\Vigston\main.cpp(18,5): warning C4007: 'WinMain': '__stdcall' でなければなりません。
+C:\Users\toydo\OneDrive\ドキュメント\GitHub\Vigston\Vigston\Vigston\main.cpp(25,25): warning C4302: '型キャスト': 'LPWSTR' から 'WORD' へ切り詰めます。
+C:\Users\toydo\OneDrive\ドキュメント\GitHub\Vigston\Vigston\Vigston\main.cpp(26,27): warning C4302: '型キャスト': 'LPWSTR' から 'WORD' へ切り詰めます。
+  texture.cpp
+  vigston.cpp
+  コードを生成中...
   Vigston.vcxproj -> C:\Users\toydo\OneDrive\ドキュメント\GitHub\Vigston\Vigston\Debug\Vigston.exe

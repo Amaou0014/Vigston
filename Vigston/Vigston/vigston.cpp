@@ -21,75 +21,95 @@ void Vigston::Init(HWND hWnd)
 
 void Vigston::Start()
 {
-	LoadTexture((TCHAR*)_T("Resources/Slime.png"), &texture);
-	LoadSound((TCHAR*)_T("Resources/maou_retoro_1.wav"), &wave_retoro1, &sb_retolo1);
-	LoadSound((TCHAR*)_T("Resources/maou_retoro_2.wav"), &wave_retoro2, &sb_retolo2);
+	Load_Texture((TCHAR*)_T("Resources/Slime.png"), &texture);
+	Load_Sound((TCHAR*)_T("Resources/maou_retoro_1.wav"), &wave_retoro1, &sb_retolo1);
+	Load_Sound((TCHAR*)_T("Resources/maou_retoro_2.wav"), &wave_retoro2, &sb_retolo2);
 
-	SetSprite(100, 100, 128, 128, 0, &sprite);
-
-	//sb_retolo2.Play(true);
+	Set_Sprite(100, 100, 128, 128, 0, &sprite);
 }
 
 // ƒƒCƒ“ƒ‹[ƒv
 void Vigston::Update()
 {
 	// •`‰æŠJŽn
-	if (SUCCEEDED(direct3d.pDevice3D->BeginScene()))
+	if (Begine_Scene())
 	{
-		DWORD ClearColor = 0xff808080;	// ”wŒiƒNƒŠƒAF
+		// ”wŒiFƒZƒbƒg
+		Set_BackColor(0xff808080);
 		// ”wŒiƒNƒŠƒA
-		direct3d.pDevice3D->Clear(0, NULL, D3DCLEAR_TARGET | D3DCLEAR_STENCIL | D3DCLEAR_ZBUFFER, ClearColor, 1.0f, 0);
+		Clear_Screen();
 
-		// «‚±‚±‚ÉŠeƒvƒƒOƒ‰ƒ€‚ð“®‚©‚·«
-		// ƒXƒvƒ‰ƒCƒg•`‰æ
+		// «‚±‚±‚ÅŠeƒvƒƒOƒ‰ƒ€‚ð“®‚©‚·«
 
-		if (keyboard.GetKey('W'))
+		if (GetKey('W'))
 		{
-			sprite.UpdatePos(0,-1);
+			Move_Sprite(0, -1, 0, &sprite);
 		}
-		if (keyboard.GetKey('A'))
+		if (GetKey('A'))
 		{
-			sprite.UpdatePos(-1, 0);
+			Move_Sprite(-1, 0, 0, &sprite);
 		}
-		if (keyboard.GetKey('S'))
+		if (GetKey('S'))
 		{
-			sprite.UpdatePos(0, 1);
+			Move_Sprite(0, 1, 0, &sprite);
 		}
-		if (keyboard.GetKey('D'))
+		if (GetKey('D'))
 		{
-			sprite.UpdatePos(1, 0);
-		}
-
-		if (keyboard.PushKey('T'))
-		{
-			sb_retolo1.Play(false);
+			Move_Sprite(1, 0, 0, &sprite);
 		}
 
-		if (keyboard.PushKey('P'))
+		if (PushKey('T'))
 		{
-			SetVolume(-10000, &sb_retolo1);
+			Play_Sound(false, &sb_retolo1);
 		}
 
-		if (keyboard.PushKey('O'))
+		if (PushKey('P'))
 		{
-			SetVolume(0, &sb_retolo1);
+			Set_Volume(-10000, &sb_retolo1);
 		}
 
+		if (PushKey('O'))
+		{
+			Set_Volume(0, &sb_retolo1);
+		}
+
+		// •`‰æˆ—
 		sprite.Draw(direct3d.pDevice3D, texture.pTexture);
 
 		// •`‰æI—¹
-		direct3d.pDevice3D->EndScene();
+		End_Scene();
 	}
 	// •`‰æ”½‰f
 	direct3d.pDevice3D->Present(NULL, NULL, NULL, NULL);
 }
 
-bool Vigston::LoadTexture(TCHAR* _name, Texture* _texture)
+void Vigston::Set_BackColor(unsigned int color)
+{
+	backColor = color;
+}
+
+void Vigston::Clear_Screen()
+{
+	direct3d.pDevice3D->Clear(0, NULL, D3DCLEAR_TARGET | D3DCLEAR_STENCIL | D3DCLEAR_ZBUFFER, backColor, 1.0f, 0);
+}
+
+bool Vigston::Begine_Scene()
+{
+	return SUCCEEDED(direct3d.pDevice3D->BeginScene());
+}
+
+bool Vigston::End_Scene()
+{
+	return SUCCEEDED(direct3d.pDevice3D->EndScene());
+}
+
+
+bool Vigston::Load_Texture(TCHAR* _name, Texture* _texture)
 {
 	return _texture->Load(direct3d.pDevice3D, _name);
 }
 
-bool Vigston::LoadSound(TCHAR* name, Wave* wave, SoundBuffer* sb)
+bool Vigston::Load_Sound(TCHAR* name, Wave* wave, SoundBuffer* sb)
 {
 	if (wave->Load(name) &&
 		sb->Create(directsound.pDirectSound8, &wave->WaveFormat, wave->WaveData, wave->DataSize))
@@ -102,19 +122,30 @@ bool Vigston::LoadSound(TCHAR* name, Wave* wave, SoundBuffer* sb)
 	}
 }
 
-void Vigston::SetVolume(long _volume, SoundBuffer* sb)
+void Vigston::Play_Sound(bool isLoop, SoundBuffer* sb)
+{
+	sb->Play(isLoop);
+}
+
+void Vigston::Set_Volume(long _volume, SoundBuffer* sb)
 {
 	sb->SetVolume(_volume);
 }
 
-long Vigston::GetVolume(SoundBuffer* sb)
+long Vigston::Get_Volume(SoundBuffer* sb)
 {
 	return sb->GetVolume();
 }
 
-void Vigston::SetSprite(float x, float y, int width, int height, float rotate, Sprite* _sprite)
+void Vigston::Set_Sprite(float x, float y, int width, int height, float rotate, Sprite* sprite)
 {
-	_sprite->SetPos(x, y);
-	_sprite->SetWidth(width, height);
-	_sprite->SetRotate(rotate);
+	sprite->SetPos(x, y);
+	sprite->SetWidth(width, height);
+	sprite->SetRotate(rotate);
+}
+
+void Vigston::Move_Sprite(float x, float y, float rotate, Sprite* sprite)
+{
+	sprite->MovePos(x,y);
+	sprite->MoveRotate(rotate);
 }

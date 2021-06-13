@@ -33,12 +33,12 @@ void Sprite::SetRotate(float Rotate)
 	rotate = Rotate;
 }
 
-void Sprite::UpdatePos(float x,float y)
+void Sprite::MovePos(float x,float y)
 {
 	pos.x += x;
 	pos.y += y;
 }
-void Sprite::UpdateRotate(float Rotate)
+void Sprite::MoveRotate(float Rotate)
 {
 	rotate += Rotate;
 }

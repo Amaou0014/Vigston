@@ -44,8 +44,8 @@ public:
 	void SetWidth(int Width,int Height);
 	void SetRotate(float Rotate);
 
-	void UpdatePos(float x,float y);
-	void UpdateRotate(float Rotate);
+	void MovePos(float x,float y);
+	void MoveRotate(float Rotate);
 
 	void SetDivide(unsigned int DivU,unsigned int DivV);
 	void SetUVNum(unsigned int NumU,unsigned int NumV);
