@@ -23,6 +23,9 @@ public:
 	Wave wave_retoro1;
 	SoundBuffer sb_retolo1;
 
+	Wave wave_retoro2;
+	SoundBuffer sb_retolo2;
+
 	bool flag = false;
 
 	const TCHAR* WC_BASIC = _T("BASIC_WINDOW");
@@ -49,7 +52,9 @@ public:
 	// 音声読み込み
 	bool LoadSound(TCHAR* name, Wave* wave, SoundBuffer* sb);
 	// 音量変更
-	void ChangeVolume(long _volume, SoundBuffer* sb);
+	void SetVolume(long _volume, SoundBuffer* sb);
+	// 音量取得
+	long GetVolume(SoundBuffer* sb);
 
 	// 描画位置セット
 	void SetSprite(float x, float y, int width, int height, float rotate, Sprite* sprite);
