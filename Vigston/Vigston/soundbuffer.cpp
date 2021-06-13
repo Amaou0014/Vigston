@@ -13,12 +13,12 @@ SoundBuffer::~SoundBuffer()
 		pSecondaryBuffer->Release();
 }
 
-bool SoundBuffer::Create(IDirectSound8*	pDirectSound8,WAVEFORMATEX& WaveFormat,byte* WaveData,int DataSize)
+bool SoundBuffer::Create(IDirectSound8*	pDirectSound8,WAVEFORMATEX* WaveFormat,byte* WaveData,int DataSize)
 {
 	
 	DSBUFFERDESC	desc = {};			// セカンダリバッファ作成用設定
 	// チャンネル数での分岐、モノラルは1チャンネル、ステレオは2チャンネル
-	if(WaveFormat.nChannels == 1){
+	if(WaveFormat->nChannels == 1){
 		desc.dwFlags =  DSBCAPS_CTRL3D | DSBCAPS_CTRLVOLUME | DSBCAPS_CTRLFREQUENCY |
 			DSBCAPS_GETCURRENTPOSITION2 | DSBCAPS_CTRLPOSITIONNOTIFY | DSBCAPS_STATIC;	
 		desc.guid3DAlgorithm = DS3DALG_NO_VIRTUALIZATION;
@@ -31,7 +31,7 @@ bool SoundBuffer::Create(IDirectSound8*	pDirectSound8,WAVEFORMATEX& WaveFormat,b
 	}
 	desc.dwSize	= sizeof(DSBUFFERDESC);
 	desc.dwBufferBytes		= DataSize;			// 音データサイズ指定
-	desc.lpwfxFormat		= &WaveFormat;		// フォーマット指定
+	desc.lpwfxFormat		= WaveFormat;		// フォーマット指定
 
 	IDirectSoundBuffer*	pPrimaryBuffer = NULL;	// プライマリバッファ
 	// プライマリバッファ作成
@@ -58,8 +58,7 @@ bool SoundBuffer::Create(IDirectSound8*	pDirectSound8,WAVEFORMATEX& WaveFormat,b
 void SoundBuffer::Play(bool isLoop)
 {
 	if(pSecondaryBuffer != NULL){
-		DWORD LoopFlag = (isLoop ? DSBPLAY_LOOPING : 0);
-		pSecondaryBuffer->Play(0,0,LoopFlag);
+		pSecondaryBuffer->Play(0,0,(DWORD)isLoop);
 	}
 }
 void SoundBuffer::Stop()
@@ -70,7 +69,7 @@ void SoundBuffer::Stop()
 	}
 }
 
-void SoundBuffer::ChangeVolume(long _volume)
+void SoundBuffer::SetVolume(long _volume)
 {
 	if (pSecondaryBuffer != NULL)
 	{
@@ -78,8 +77,9 @@ void SoundBuffer::ChangeVolume(long _volume)
 	}
 }
 
-long SoundBuffer::GetVolume(long _volume)
+long SoundBuffer::GetVolume()
 {
+	long _volume = 0;
 	if (pSecondaryBuffer != NULL)
 	{
 		pSecondaryBuffer->GetVolume((LPLONG)_volume);

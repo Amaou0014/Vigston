@@ -23,8 +23,11 @@ void Vigston::Start()
 {
 	LoadTexture((TCHAR*)_T("Resources/Slime.png"), &texture);
 	LoadSound((TCHAR*)_T("Resources/maou_retoro_1.wav"), &wave_retoro1, &sb_retolo1);
+	LoadSound((TCHAR*)_T("Resources/maou_retoro_2.wav"), &wave_retoro2, &sb_retolo2);
 
 	SetSprite(100, 100, 128, 128, 0, &sprite);
+
+	//sb_retolo2.Play(true);
 }
 
 // ƒƒCƒ“ƒ‹[ƒv
@@ -60,12 +63,16 @@ void Vigston::Update()
 		if (keyboard.PushKey('T'))
 		{
 			sb_retolo1.Play(false);
-			sprite.UpdateRotate(10);
 		}
-		if (keyboard.ReleaseKey('T'))
+
+		if (keyboard.PushKey('P'))
 		{
-			sb_retolo1.Play(false);
-			sprite.UpdateRotate(-10);
+			SetVolume(-10000, &sb_retolo1);
+		}
+
+		if (keyboard.PushKey('O'))
+		{
+			SetVolume(0, &sb_retolo1);
 		}
 
 		sprite.Draw(direct3d.pDevice3D, texture.pTexture);
@@ -85,7 +92,7 @@ bool Vigston::LoadTexture(TCHAR* _name, Texture* _texture)
 bool Vigston::LoadSound(TCHAR* name, Wave* wave, SoundBuffer* sb)
 {
 	if (wave->Load(name) &&
-		sb->Create(directsound.pDirectSound8, wave->WaveFormat, wave->WaveData, wave->DataSize))
+		sb->Create(directsound.pDirectSound8, &wave->WaveFormat, wave->WaveData, wave->DataSize))
 	{
 		return true;
 	}
@@ -95,9 +102,14 @@ bool Vigston::LoadSound(TCHAR* name, Wave* wave, SoundBuffer* sb)
 	}
 }
 
-void Vigston::ChangeVolume(long _volume, SoundBuffer* sb)
+void Vigston::SetVolume(long _volume, SoundBuffer* sb)
 {
-	sb->ChangeVolume(_volume);
+	sb->SetVolume(_volume);
+}
+
+long Vigston::GetVolume(SoundBuffer* sb)
+{
+	return sb->GetVolume();
 }
 
 void Vigston::SetSprite(float x, float y, int width, int height, float rotate, Sprite* _sprite)

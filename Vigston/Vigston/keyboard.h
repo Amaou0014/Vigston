@@ -2,8 +2,8 @@
 
 #include <Windows.h>
 
-static bool flg_p;
-static bool flg_r;
+static bool flg_p = false;
+static bool flg_r = false;
 
 class Keyboard
 {
