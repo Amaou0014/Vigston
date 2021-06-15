@@ -31,7 +31,7 @@ void Vigston::Start()
 // メインループ
 void Vigston::Update()
 {
-	// 描画開始
+	// レンダリング開始
 	if (Begine_Scene())
 	{
 		// 背景色セット
@@ -74,9 +74,9 @@ void Vigston::Update()
 		}
 
 		// 描画処理
-		sprite.Draw(direct3d.pDevice3D, texture.pTexture);
+		Draw(&texture, &sprite);
 
-		// 描画終了
+		// レンダリング終了
 		End_Scene();
 	}
 	// 描画反映
@@ -148,4 +148,9 @@ void Vigston::Move_Sprite(float x, float y, float rotate, Sprite* sprite)
 {
 	sprite->MovePos(x,y);
 	sprite->MoveRotate(rotate);
+}
+
+void Vigston::Draw(Texture* texture, Sprite* sprite)
+{
+	sprite->Draw(direct3d.pDevice3D, texture->pTexture);
 }

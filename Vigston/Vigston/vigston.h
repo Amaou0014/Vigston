@@ -79,4 +79,6 @@ public:
 	void Set_Sprite(float x, float y, int width, int height, float rotate, Sprite* sprite);
 	// •`‰æˆÊ’u‚ð“®‚©‚·
 	void Move_Sprite(float x, float y, float rotate, Sprite* sprite);
+	// •`‰æ‚·‚é
+	void Draw(Texture* texture, Sprite* sprite);
 };
