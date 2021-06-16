@@ -1,54 +1,48 @@
 #include "keyboard.h"
 
 
-void Keyboard::GetKeyState(unsigned char key[256])
+void Keyboard::GetKeyState()
 {
+	for (int i = 0; i < 256; i++)
+	{
+		keybuf[i] = key[i];
+	}
+	GetKeyboardState((PBYTE)keybuf);
 	GetKeyboardState((PBYTE)key);
 }
 
-bool Keyboard::GetKey(int key)
+bool Keyboard::GetKey(unsigned char keycode)
 {
-	return GetAsyncKeyState(key);
-}
-
-bool Keyboard::PushKey(int key)
-{
-	if (GetAsyncKeyState(key))
+	if (key[keycode] & 0x80)
 	{
-		if (!flg_p)
-		{
-			flg_p = true;
-
-			return true;
-		}
-		else
-		{
-			return false;
-		}
+		return true;
 	}
 	else
 	{
-		flg_p = false;
+		return false;
+	}
+}
+
+bool Keyboard::PushKey(unsigned char keycode)
+{
+	if (key[keycode] & 0x80 && !(keybuf[keycode] & 0x80))
+	{
+		return true;
+	}
+	else
+	{
+		return false;
 	}
 }
 
 bool Keyboard::ReleaseKey(int key)
 {
-	if (GetAsyncKeyState(key))
+	if (key & 0x80)
 	{
-		flg_r = true;
-		return false;
+		return true;
 	}
 	else
 	{
-		if (!flg_r)
-		{
-			return false;
-		}
-		else
-		{
-			flg_r = false;
-			return true;
-		}
+		return false;
 	}
 }

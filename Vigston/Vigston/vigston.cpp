@@ -40,53 +40,10 @@ void Vigston::Update()
 		Clear_Screen();
 
 		// «‚±‚±‚ÅŠeƒvƒƒOƒ‰ƒ€‚ğ“®‚©‚·«
-		keyboard.GetKeyState(key);
+		keyboard.GetKeyState();
 
-		if (key[0x1B] & 0x80)
+		if (keyboard.PushKey(KEY_CODE_LEFTMOUSE))
 		{
-			Move_Sprite(0, 0, 1, &sprite);
-		}
-
-		if (keyboard.GetKey('W'))
-		{
-			Move_Sprite(0, -1, 0, &sprite);
-		}
-		if (keyboard.GetKey('A'))
-		{
-			Move_Sprite(-1, 0, 0, &sprite);
-		}
-		if (keyboard.GetKey('S'))
-		{
-			Move_Sprite(0, 1, 0, &sprite);
-		}
-		if (keyboard.GetKey('D'))
-		{
-			Move_Sprite(1, 0, 0, &sprite);
-		}
-
-		if (keyboard.PushKey('R'))
-		{
-			Move_Sprite(0, 0, 1, &sprite);
-		}
-
-		if (keyboard.ReleaseKey('R'))
-		{
-			Move_Sprite(0, 0, -1, &sprite);
-		}
-
-		if (keyboard.PushKey('T'))
-		{
-			Play_Sound(false, &sb_retolo1);
-		}
-
-		if (keyboard.PushKey('P'))
-		{
-			Set_Volume(-10000, &sb_retolo1);
-		}
-
-		if (keyboard.PushKey('O'))
-		{
-			Set_Volume(0, &sb_retolo1);
 		}
 
 		// •`‰æˆ—

@@ -17,7 +17,7 @@ public:
 	DirectSound	directsound;
 
 	Keyboard keyboard;
-	unsigned char key[256];
+	unsigned char keybuf[256];
 
 	Texture texture;
 	Sprite sprite;
