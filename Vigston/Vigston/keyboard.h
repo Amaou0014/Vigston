@@ -5,8 +5,14 @@
 static bool flg_p = false;
 static bool flg_r = false;
 
-bool GetKey(int key);
+class Keyboard
+{
+public:
+	void GetKeyState(unsigned char key[256]);
 
-bool PushKey(int key);
+	bool GetKey(int key);
 
-bool ReleaseKey(int key);
+	bool PushKey(int key);
+
+	bool ReleaseKey(int key);
+};
