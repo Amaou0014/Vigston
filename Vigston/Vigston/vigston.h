@@ -16,6 +16,9 @@ public:
 	Direct3D	direct3d;
 	DirectSound	directsound;
 
+	Keyboard keyboard;
+	unsigned char key[256];
+
 	Texture texture;
 	Sprite sprite;
 
