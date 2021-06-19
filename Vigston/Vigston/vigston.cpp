@@ -42,7 +42,31 @@ void Vigston::Update()
 		// «‚±‚±‚ÅŠeƒvƒƒOƒ‰ƒ€‚ğ“®‚©‚·«
 		keyboard.GetKeyState();
 
-		if (keyboard.GetKey(KEY_CODE_1))
+		if (keyboard.GetKey(KEY_CODE_W))
+		{
+			Move_Sprite(0, -1, 0, &sprite);
+		}
+		if (keyboard.GetKey(KEY_CODE_A))
+		{
+			Move_Sprite(-1, 0, 0, &sprite);
+		}
+		if (keyboard.GetKey(KEY_CODE_S))
+		{
+			Move_Sprite(0, 1, 0, &sprite);
+		}
+		if (keyboard.GetKey(KEY_CODE_D))
+		{
+			Move_Sprite(1, 0, 0, &sprite);
+		}
+		if (keyboard.PushKey(KEY_CODE_R))
+		{
+			Move_Sprite(0, 0, -1, &sprite);
+		}
+		if (keyboard.ReleaseKey(KEY_CODE_R))
+		{
+			Move_Sprite(0, 0, 1, &sprite);
+		}
+		if (keyboard.PushKey(KEY_CODE_T))
 		{
 			Move_Sprite(0, 0, 1, &sprite);
 		}

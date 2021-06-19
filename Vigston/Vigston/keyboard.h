@@ -163,9 +163,6 @@
 #define KEY_CODE_PA1                    0xFD
 #define KEY_CODE_OEM_CLEAR              0xFE
 
-static unsigned char key[256];
-static unsigned char keybuf[256];
-
 static bool flg_p = false;
 static bool trigger = false;
 
@@ -173,7 +170,12 @@ class Keyboard
 {
 public:
 	void GetKeyState();
-	bool GetKey(unsigned char key);
-	bool PushKey(unsigned char key);
-	bool ReleaseKey(int key);
+	bool GetKey(unsigned char keycode);
+	bool PushKey(unsigned char keycode);
+	bool ReleaseKey(unsigned char keycode);
+
+private:
+	const int isInputNum = 0x80;
+	BYTE key[256];
+	BYTE keybuf[256];
 };
