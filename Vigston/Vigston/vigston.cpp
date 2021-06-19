@@ -42,8 +42,9 @@ void Vigston::Update()
 		// «‚±‚±‚ÅŠeƒvƒƒOƒ‰ƒ€‚ğ“®‚©‚·«
 		keyboard.GetKeyState();
 
-		if (keyboard.PushKey(KEY_CODE_LEFTMOUSE))
+		if (keyboard.GetKey(KEY_CODE_1))
 		{
+			Move_Sprite(0, 0, 1, &sprite);
 		}
 
 		// •`‰æˆ—
