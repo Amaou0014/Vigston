@@ -7,13 +7,16 @@ void Keyboard::GetKeyState()
 	{
 		keybuf[i] = key[i];
 	}
-	GetKeyboardState((PBYTE)keybuf);
-	GetKeyboardState((PBYTE)key);
+
+	if (!GetKeyboardState(key))
+	{
+
+	}
 }
 
 bool Keyboard::GetKey(unsigned char keycode)
 {
-	if (key[keycode] & 0x80)
+	if (key[keycode] & isInputNum)
 	{
 		return true;
 	}
@@ -25,24 +28,25 @@ bool Keyboard::GetKey(unsigned char keycode)
 
 bool Keyboard::PushKey(unsigned char keycode)
 {
-	if (key[keycode] & 0x80 && !(keybuf[keycode] & 0x80))
+	if (key[keycode] & isInputNum)
 	{
-		return true;
+		if (!(keybuf[keycode] & isInputNum))
+		{
+			return true;
+		}
 	}
-	else
-	{
-		return false;
-	}
+
+	return false;
 }
 
-bool Keyboard::ReleaseKey(int key)
+bool Keyboard::ReleaseKey(unsigned char keycode)
 {
-	if (key & 0x80)
+	if (!(key[keycode] & isInputNum))
 	{
-		return true;
+		if ((keybuf[keycode] & isInputNum))
+		{
+			return true;
+		}
 	}
-	else
-	{
-		return false;
-	}
+	return false;
 }
