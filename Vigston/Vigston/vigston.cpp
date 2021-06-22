@@ -10,12 +10,12 @@ Vigston::~Vigston()
 
 }
 
-void Vigston::Init(HWND hWnd)
+void Vigston::Init()
 {
 	// Direct3Dì¬
-	direct3d.Create(hWnd, WINDOW_WIDTH, WINDOW_HEIGHT);
+	direct3d.Create(window.hwnd, window.width, window.height);
 	// DirectSoundì¬
-	directsound.Create(hWnd);
+	directsound.Create(window.hwnd);
 	// «ŠeƒvƒƒOƒ‰ƒ€‚Ì‰Šú‰»‚ð“®‚©‚·«
 }
 
@@ -79,6 +79,16 @@ void Vigston::Update()
 	}
 	// •`‰æ”½‰f
 	direct3d.pDevice3D->Present(NULL, NULL, NULL, NULL);
+}
+
+void Vigston::Set_Window(const TCHAR* name, const HINSTANCE hInst)
+{
+	window.Set_Window(name, hInst);
+}
+
+void Vigston::Create_Window(LPCTSTR name, DWORD dwStyle, int x, int y, int width, int height, HWND hWndParent, HMENU hMenu)
+{
+	window.Create_Window(name, dwStyle, x, y, width, height, hWndParent, hMenu);
 }
 
 void Vigston::Set_BackColor(unsigned int color)
