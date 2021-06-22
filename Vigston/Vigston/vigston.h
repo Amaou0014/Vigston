@@ -8,6 +8,7 @@
 #include "wave.h"
 #include "soundbuffer.h"
 #include "keyboard.h"
+#include "window.h"
 
 
 class Vigston
@@ -15,6 +16,8 @@ class Vigston
 public:
 	Direct3D	direct3d;
 	DirectSound	directsound;
+
+	Window window;
 
 	Keyboard keyboard;
 	unsigned char keybuf[256];
@@ -30,14 +33,6 @@ public:
 
 	bool flag = false;
 
-	const TCHAR* WC_BASIC = _T("BASIC_WINDOW");
-	WNDCLASSEX wcex;
-
-	int WINDOW_WIDTH;
-	int WINDOW_HEIGHT;
-
-	HWND hWnd;
-
 	DWORD backColor;
 
 	Vigston();
@@ -47,7 +42,7 @@ public:
 	/////////////////////////////////
 
 	// 初期化
-	void Init(HWND hWnd);
+	void Init();
 	// Updateの前に一回だけ呼ばれる
 	void Start();
 	// 毎フレーム呼ばれる
@@ -55,6 +50,10 @@ public:
 
 	/////////////////////////////////
 
+	// ウィンドウセット
+	void Set_Window(const TCHAR* name, const HINSTANCE hInst);
+	// ウィンドウ作成
+	void Create_Window(LPCTSTR name, DWORD dwStyle, int x, int y, int width, int height, HWND hWndParent, HMENU hMenu);
 	// 背景色セット(十六進数)
 	void Set_BackColor(unsigned int color);
 
