@@ -19,6 +19,8 @@ public:
 
 	Window window;
 
+	MSG msg = {};
+
 	Keyboard keyboard;
 	unsigned char keybuf[256];
 
@@ -42,7 +44,7 @@ public:
 	/////////////////////////////////
 
 	// 初期化
-	void Init();
+	void Init(HINSTANCE hInstance);
 	// Updateの前に一回だけ呼ばれる
 	void Start();
 	// 毎フレーム呼ばれる
@@ -52,8 +54,16 @@ public:
 
 	// ウィンドウセット
 	void Set_Window(const TCHAR* name, const HINSTANCE hInst);
+	// ウィンドウ座標セット
+	void Set_Window_Pos(int x, int y);
+	// ウィンドウ座標セット
+	void Set_Window_Size(int w, int h);
 	// ウィンドウ作成
-	void Create_Window(LPCTSTR name, DWORD dwStyle, int x, int y, int width, int height, HWND hWndParent, HMENU hMenu);
+	void Create_Window(LPCTSTR name, DWORD dwStyle, HWND hWndParent, HMENU hMenu);
+	// メッセージループ
+	bool GameQuit();
+	// メッセージループ
+	bool ProcessMessage();
 	// 背景色セット(十六進数)
 	void Set_BackColor(unsigned int color);
 
