@@ -3,6 +3,10 @@
 
 Window::Window()
 {
+    x = 100;
+    y = 100;
+    w = 640;
+    h = 480;
 }
 Window::~Window()
 {
@@ -34,13 +38,42 @@ bool Window::Set_Window(const TCHAR* name, const HINSTANCE hInst)
 
     return true;
 }
+
+void Window::Set_Pos(int _x, int _y)
+{
+    x = _x;
+    y = _y;
+}
+
+int Window::Get_Pos_X()
+{
+    return x;
+}
+
+int Window::Get_Pos_Y()
+{
+    return y;
+}
+
+void Window::Set_Size(int _width, int _height)
+{
+    w = _width;
+    h = _height;
+}
+
+int Window::Get_Width()
+{
+    return w;
+}
+
+int Window::Get_Height()
+{
+    return h;
+}
+
 bool Window::Create_Window(
     LPCTSTR name, // ウィンドウ名
     DWORD dwStyle,        // ウィンドウスタイル
-    int x,                // ウィンドウの横方向の位置
-    int y,                // ウィンドウの縦方向の位置
-    int _width,           // ウィンドウの幅
-    int _height,          // ウィンドウの高さ
     HWND hWndParent,      // 親ウィンドウまたはオーナーウィンドウのハンドル
     HMENU hMenu           // メニューハンドルまたは子ウィンドウ ID
 ) {
@@ -50,47 +83,62 @@ bool Window::Create_Window(
         dwStyle,            //  ウィンドウの種類
         x,                  // ウィンドウを表示する位置（X座標）
         y,                  // ウィンドウを表示する位置（Y座標）
-        _width,               // ウィンドウの幅
-        _height,            // ウィンドウの高さ
+        w,               // ウィンドウの幅
+        h,            // ウィンドウの高さ
         hWndParent,            // 親ウィンドウのウィンドウハンドル
         hMenu,               // メニューハンドル
         hInstance,         // インスタンスハンドル
         this               // その他の作成データ
     );
 
-    width = _width;
-    height = _height;
-
     if (hwnd == nullptr)
         return false;
 
     return true;
 }
-LRESULT  Window::WndProc(HWND hWnd, UINT msg, WPARAM wp, LPARAM lp)
+LRESULT  Window::WndProc(HWND hwnd, UINT msg, WPARAM wp, LPARAM lp)
 {
     switch (msg)
     {
     case WM_DESTROY:
         PostQuitMessage(0);
         return 0;
+    case WM_KEYDOWN:
+        switch (wp)
+        {
+        case VK_ESCAPE:
+            switch (MessageBox(hwnd, _T("Quit the application"), _T("Message"), MB_OKCANCEL))
+            {
+            case IDOK:
+                PostQuitMessage(0);
+                return 0;
+            case IDCANCEL:
+                return 0;
+            default:
+                break;
+            }
+            return 0;
+        default:
+            break;
+        }
     }
-    return DefWindowProc(hWnd, msg, wp, lp);
+    return DefWindowProc(hwnd, msg, wp, lp);
 }
-LRESULT CALLBACK Window::StaticWndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
+LRESULT CALLBACK Window::StaticWndProc(HWND hwnd, UINT message, WPARAM wParam, LPARAM lParam)
 {
 
-    Window* This = (Window*)GetWindowLongPtr(hWnd, GWLP_USERDATA);
+    Window* This = (Window*)GetWindowLongPtr(hwnd, GWLP_USERDATA);
     if (!This) {//取得できなかった(ウィンドウ生成中)場合
         if (message == WM_CREATE) {
             This = (Window*)((LPCREATESTRUCT)lParam)->lpCreateParams;
             if (This) {
-                SetWindowLongPtr(hWnd, GWLP_USERDATA, (LONG_PTR)This);
-                return This->WndProc(hWnd, message, wParam, lParam);
+                SetWindowLongPtr(hwnd, GWLP_USERDATA, (LONG_PTR)This);
+                return This->WndProc(hwnd, message, wParam, lParam);
             }
         }
     }
     else {//取得できた場合(ウィンドウ生成後)
-        return This->WndProc(hWnd, message, wParam, lParam);
+        return This->WndProc(hwnd, message, wParam, lParam);
     }
-    return DefWindowProc(hWnd, message, wParam, lParam);
+    return DefWindowProc(hwnd, message, wParam, lParam);
 }

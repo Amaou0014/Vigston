@@ -10,10 +10,12 @@ Vigston::~Vigston()
 
 }
 
-void Vigston::Init()
+void Vigston::Init(HINSTANCE hInstance)
 {
+	Set_Window(_T("BASIC_WINDOW"), hInstance);
+	Create_Window(_T("VigstonApp"), WS_OVERLAPPEDWINDOW | WS_VISIBLE, nullptr, nullptr);
 	// Direct3D作成
-	direct3d.Create(window.hwnd, window.width, window.height);
+	direct3d.Create(window.hwnd, window.w, window.h);
 	// DirectSound作成
 	directsound.Create(window.hwnd);
 	// ↓各プログラムの初期化を動かす↓
@@ -86,9 +88,45 @@ void Vigston::Set_Window(const TCHAR* name, const HINSTANCE hInst)
 	window.Set_Window(name, hInst);
 }
 
-void Vigston::Create_Window(LPCTSTR name, DWORD dwStyle, int x, int y, int width, int height, HWND hWndParent, HMENU hMenu)
+void Vigston::Set_Window_Pos(int x, int y)
 {
-	window.Create_Window(name, dwStyle, x, y, width, height, hWndParent, hMenu);
+	window.x = x;
+	window.y = y;
+}
+
+void Vigston::Set_Window_Size(int w, int h)
+{
+	window.w = w;
+	window.h = h;
+}
+
+void Vigston::Create_Window(LPCTSTR name, DWORD dwStyle,HWND hWndParent, HMENU hMenu)
+{
+	window.Create_Window(name, dwStyle, hWndParent, hMenu);
+}
+
+bool Vigston::GameQuit()
+{
+	if (msg.message != WM_QUIT)
+	{
+		return false;
+	}
+	else
+	{
+		return true;
+	}
+}
+
+bool Vigston::ProcessMessage()
+{
+	if (PeekMessage(&msg, NULL, 0, 0, PM_REMOVE)) {
+		DispatchMessage(&msg);	// アプリケーションの各ウィンドウプロシージャにメッセージを転送する
+		return true;
+	}
+	else
+	{
+		return false;
+	}
 }
 
 void Vigston::Set_BackColor(unsigned int color)
