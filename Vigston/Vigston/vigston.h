@@ -22,16 +22,6 @@ public:
 	MSG msg = {};
 
 	Keyboard keyboard;
-	unsigned char keybuf[256];
-
-	Texture texture;
-	Sprite sprite;
-
-	Wave wave_retoro1;
-	SoundBuffer sb_retolo1;
-
-	Wave wave_retoro2;
-	SoundBuffer sb_retolo2;
 
 	bool flag = false;
 
@@ -45,10 +35,6 @@ public:
 
 	// ‰Šú‰»
 	void Init(HINSTANCE hInstance);
-	// Update‚Ì‘O‚Éˆê‰ñ‚¾‚¯ŒÄ‚Î‚ê‚é
-	void Start();
-	// –ˆƒtƒŒ[ƒ€ŒÄ‚Î‚ê‚é
-	void Update();
 
 	/////////////////////////////////
 
@@ -94,3 +80,5 @@ public:
 	// •`‰æ‚·‚é
 	void Draw(Texture* texture, Sprite* sprite);
 };
+
+void Init(HINSTANCE hInstance);
