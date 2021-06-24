@@ -21,68 +21,6 @@ void Vigston::Init(HINSTANCE hInstance)
 	// ↓各プログラムの初期化を動かす↓
 }
 
-void Vigston::Start()
-{
-	Load_Texture((TCHAR*)_T("Resources/Slime.png"), &texture);
-	Load_Sound((TCHAR*)_T("Resources/maou_retoro_1.wav"), &wave_retoro1, &sb_retolo1);
-	Load_Sound((TCHAR*)_T("Resources/maou_retoro_2.wav"), &wave_retoro2, &sb_retolo2);
-
-	Set_Sprite(100, 100, 128, 128, 0, &sprite);
-}
-
-// メインループ
-void Vigston::Update()
-{
-	// レンダリング開始
-	if (Begine_Scene())
-	{
-		// 背景色セット
-		Set_BackColor(0xff808080);
-		// 背景クリア
-		Clear_Screen();
-
-		// ↓ここで各プログラムを動かす↓
-		keyboard.GetKeyState();
-
-		if (keyboard.GetKey(KEY_CODE_W))
-		{
-			Move_Sprite(0, -1, 0, &sprite);
-		}
-		if (keyboard.GetKey(KEY_CODE_A))
-		{
-			Move_Sprite(-1, 0, 0, &sprite);
-		}
-		if (keyboard.GetKey(KEY_CODE_S))
-		{
-			Move_Sprite(0, 1, 0, &sprite);
-		}
-		if (keyboard.GetKey(KEY_CODE_D))
-		{
-			Move_Sprite(1, 0, 0, &sprite);
-		}
-		if (keyboard.PushKey(KEY_CODE_R))
-		{
-			Move_Sprite(0, 0, -1, &sprite);
-		}
-		if (keyboard.ReleaseKey(KEY_CODE_R))
-		{
-			Move_Sprite(0, 0, 1, &sprite);
-		}
-		if (keyboard.PushKey(KEY_CODE_T))
-		{
-			Move_Sprite(0, 0, 1, &sprite);
-		}
-
-		// 描画処理
-		Draw(&texture, &sprite);
-
-		// レンダリング終了
-		End_Scene();
-	}
-	// 描画反映
-	direct3d.pDevice3D->Present(NULL, NULL, NULL, NULL);
-}
-
 void Vigston::Set_Window(const TCHAR* name, const HINSTANCE hInst)
 {
 	window.Set_Window(name, hInst);
