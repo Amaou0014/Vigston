@@ -1,5 +1,6 @@
 #include "vigston.h"
 
+#include<string>
 
 int WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nCmdShow)
 {
@@ -12,6 +13,7 @@ int WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int n
 
 	vigston.Load_Texture((TCHAR*)_T("Resources/Slime.png"), &tex_slime);
 	vigston.Set_Sprite(100, 100, 128, 128, 0, &sp_slime);
+	vigston.Create_Font(32);
 
 	while (!vigston.GameQuit())
 	{
@@ -28,14 +30,36 @@ int WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int n
 				vigston.Set_BackColor(0xff808080);
 				// ”wŒiƒNƒŠƒA
 				vigston.Clear_Screen();
-				// •`‰æˆ—
-				vigston.Draw(&tex_slime, &sp_slime);
 
+				vigston.GetKeyState();
+
+				
+
+				if (vigston.GetKey(KEY_CODE_W))
+				{
+					vigston.Move_Sprite(0, -10, 0, &sp_slime);
+				}
+				if (vigston.GetKey(KEY_CODE_A))
+				{
+					vigston.Move_Sprite(-10, 0, 0, &sp_slime);
+				}
+				if (vigston.GetKey(KEY_CODE_S))
+				{
+					vigston.Move_Sprite(0, 10, 0, &sp_slime);
+				}
+				if (vigston.GetKey(KEY_CODE_D))
+				{
+					vigston.Move_Sprite(10, 0, 0, &sp_slime);
+				}
+
+				// •`‰æˆ—
+				vigston.Draw_Image(&tex_slime, &sp_slime);
+				vigston.Draw_Font(0, 0, 0xffff0000, _T("x = %.1f", sp_slime.pos.x));
 				// ƒŒƒ“ƒ_ƒŠƒ“ƒOI—¹
 				vigston.End_Scene();
 			}
 			// •`‰æ”½‰f
-			vigston.direct3d.pDevice3D->Present(NULL, NULL, NULL, NULL);
+			vigston.ScreenFlip();
 		}
 	}
 

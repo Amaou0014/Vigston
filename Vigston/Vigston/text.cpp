@@ -16,7 +16,7 @@ Text::~Text()
 }
 
 // DirectXフォント作成
-bool Text::Create(IDirect3DDevice9* pD3DDevice, int FontHeight)
+bool Text::Create(IDirect3DDevice9* pD3DDevice, int size)
 {
 	HFONT	hFont = NULL;	// フォントハンドル
 	LOGFONT	LogFont = {};	// フォント構造体
@@ -27,7 +27,7 @@ bool Text::Create(IDirect3DDevice9* pD3DDevice, int FontHeight)
 	GetObject(hFont, sizeof(LOGFONT), &LogFont);
 	// DirectXフォント作成
 	if (FAILED(D3DXCreateFont(pD3DDevice,
-		FontHeight,					// 文字高さ
+		size,					// 文字高さ
 		LogFont.lfWidth,			// 文字幅
 		LogFont.lfWeight,			// フォントの太さ
 		0,							// ミップマップレベル
@@ -48,22 +48,22 @@ bool Text::Create(IDirect3DDevice9* pD3DDevice, int FontHeight)
 
 
 // 文字列の描画
-void Text::Draw(DWORD Color, int x, int y, const TCHAR* Str, ...)
+void Text::Draw(int x, int y, DWORD color, const TCHAR* str, ...)
 {
 	va_list args;
-	va_start(args, Str);					// 可変引数の最初の要素を格納する
-	int len = _vsctprintf(Str, args) + 1;	// 文字数カウント、ヌル文字分加える
+	va_start(args, str);					// 可変引数の最初の要素を格納する
+	int len = _vsctprintf(str, args) + 1;	// 文字数カウント、ヌル文字分加える
 	if (Buf.size() < (UINT)len)
 		Buf.resize(len);					// 文字サイズ分動的にメモリ確保
-	_vstprintf(&Buf[0], Str, args);			// 文字を整形する
+	_vstprintf(&Buf[0], str, args);			// 文字を整形する
 
 	SetRect(&Rect, 0, 0, 0, 0);
 	// 描画領域サイズ取得
-	pFont->DrawText(NULL, &Buf[0], -1, &Rect, DT_LEFT | DT_CALCRECT, Color);
+	pFont->DrawText(NULL, &Buf[0], -1, &Rect, DT_LEFT | DT_CALCRECT, color);
 	// 本描画
 	Rect.left += x;
 	Rect.right += x;
 	Rect.top += y;
 	Rect.bottom += y;
-	pFont->DrawText(NULL, &Buf[0], -1, &Rect, DT_LEFT, Color);
+	pFont->DrawText(NULL, &Buf[0], -1, &Rect, DT_LEFT, color);
 }

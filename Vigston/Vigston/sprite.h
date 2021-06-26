@@ -40,15 +40,21 @@ public:
 	// デストラクタ
 	~Sprite();
 
-	void SetPos(float x,float y);
-	void SetWidth(int Width,int Height);
-	void SetRotate(float Rotate);
+	void Set_Pos(float x,float y);
+	void Set_Width(int Width,int Height);
+	void Set_Rotate(float Rotate);
 
-	void MovePos(float x,float y);
-	void MoveRotate(float Rotate);
+	float Get_PosX();
+	float Get_PosY();
+	int Get_Width();
+	int Get_Height();
+	float Get_Rotate();
 
-	void SetDivide(unsigned int DivU,unsigned int DivV);
-	void SetUVNum(unsigned int NumU,unsigned int NumV);
+	void Move_Pos(float x,float y);
+	void Move_Rotate(float Rotate);
+
+	void Set_Divide(unsigned int DivU,unsigned int DivV);
+	void Set_UVNum(unsigned int NumU,unsigned int NumV);
 	void Draw(IDirect3DDevice9* pDevice3D,IDirect3DTexture9* pTexture,bool isTurn = false);
 
 };
