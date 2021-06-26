@@ -18,8 +18,8 @@ public:
 	virtual ~Text();
 
 	// DirectXƒtƒHƒ“ƒgì¬
-	bool Create(IDirect3DDevice9* pD3DDevice, int FontHeight = 16);
+	bool Create(IDirect3DDevice9* pD3DDevice, int size = 16);
 
 	// •¶š—ñ‚Ì•`‰æ
-	void Draw(DWORD Color, int x, int y, const TCHAR* Str, ...);
+	void Draw( int x, int y, DWORD color, const TCHAR* str, ...);
 };

@@ -87,6 +87,11 @@ bool Vigston::End_Scene()
 	return SUCCEEDED(direct3d.pDevice3D->EndScene());
 }
 
+void Vigston::ScreenFlip()
+{
+	direct3d.pDevice3D->Present(NULL, NULL, NULL, NULL);
+}
+
 
 bool Vigston::Load_Texture(TCHAR* _name, Texture* _texture)
 {
@@ -121,20 +126,50 @@ long Vigston::Get_Volume(SoundBuffer* sb)
 	return sb->GetVolume();
 }
 
+bool Vigston::Create_Font(int size)
+{
+	return text.Create(direct3d.pDevice3D, size);
+}
+
+void Vigston::Draw_Font(int x, int y, DWORD color, const TCHAR* str)
+{
+	text.Draw(x,y, color, str);
+}
+
 void Vigston::Set_Sprite(float x, float y, int width, int height, float rotate, Sprite* sprite)
 {
-	sprite->SetPos(x, y);
-	sprite->SetWidth(width, height);
-	sprite->SetRotate(rotate);
+	sprite->Set_Pos(x, y);
+	sprite->Set_Width(width, height);
+	sprite->Set_Rotate(rotate);
 }
 
 void Vigston::Move_Sprite(float x, float y, float rotate, Sprite* sprite)
 {
-	sprite->MovePos(x,y);
-	sprite->MoveRotate(rotate);
+	sprite->Move_Pos(x,y);
+	sprite->Move_Rotate(rotate);
 }
 
-void Vigston::Draw(Texture* texture, Sprite* sprite)
+void Vigston::Draw_Image(Texture* texture, Sprite* sprite)
 {
 	sprite->Draw(direct3d.pDevice3D, texture->pTexture);
+}
+
+void Vigston::GetKeyState()
+{
+	keyboard.GetKeyState();
+}
+
+bool Vigston::GetKey(unsigned char keycode)
+{
+	return keyboard.GetKey(keycode);
+}
+
+bool Vigston::PushKey(unsigned char keycode)
+{
+	return keyboard.PushKey(keycode);
+}
+
+bool Vigston::ReleaseKey(unsigned char keycode)
+{
+	return keyboard.ReleaseKey(keycode);
 }

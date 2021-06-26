@@ -17,33 +17,58 @@ Sprite::Sprite()
 // デストラクタ
 Sprite::~Sprite(){}
 
-void Sprite::SetPos(float x,float y)
+void Sprite::Set_Pos(float x,float y)
 {
 	pos.x = x;
 	pos.y = y;
 }
-void Sprite::SetWidth(int Width,int Height)
+void Sprite::Set_Width(int Width,int Height)
 {
 	width = Width;
 	height = Height;
 }
 
-void Sprite::SetRotate(float Rotate)
+void Sprite::Set_Rotate(float Rotate)
 {
 	rotate = Rotate;
 }
 
-void Sprite::MovePos(float x,float y)
+float Sprite::Get_PosX()
+{
+	return pos.x;
+}
+
+float Sprite::Get_PosY()
+{
+	return pos.y;
+}
+
+int Sprite::Get_Width()
+{
+	return width;
+}
+
+int Sprite::Get_Height()
+{
+	return height;
+}
+
+float Sprite::Get_Rotate()
+{
+	return rotate;
+}
+
+void Sprite::Move_Pos(float x,float y)
 {
 	pos.x += x;
 	pos.y += y;
 }
-void Sprite::MoveRotate(float Rotate)
+void Sprite::Move_Rotate(float Rotate)
 {
 	rotate += Rotate;
 }
 
-void Sprite::SetDivide(unsigned int DivU,unsigned int DivV)
+void Sprite::Set_Divide(unsigned int DivU,unsigned int DivV)
 {
 	if(DivU <= 0 || DivV <= 0)
 		return;
@@ -52,7 +77,7 @@ void Sprite::SetDivide(unsigned int DivU,unsigned int DivV)
 	divV = DivV;
 }
 
-void Sprite::SetUVNum(unsigned int NumU,unsigned int NumV)
+void Sprite::Set_UVNum(unsigned int NumU,unsigned int NumV)
 {
 	if(NumU >= divU)
 		return;

@@ -20,8 +20,9 @@ public:
 	Window window;
 
 	MSG msg = {};
-
 	Keyboard keyboard;
+
+	Text text;
 
 	bool flag = false;
 
@@ -60,6 +61,8 @@ public:
 	bool Begine_Scene();
 	// レンダリング終了
 	bool End_Scene();
+	// 描画反映
+	void ScreenFlip();
 
 	// 画像読み込み
 	bool Load_Texture(TCHAR* name, Texture* texture);
@@ -73,12 +76,22 @@ public:
 	// 音量取得
 	long Get_Volume(SoundBuffer* sb);
 
+	bool Create_Font(int size = 16);
+	void Draw_Font(int x, int y, DWORD color,const TCHAR* str);
+
 	// 描画位置セット
 	void Set_Sprite(float x, float y, int width, int height, float rotate, Sprite* sprite);
 	// 描画位置を動かす
 	void Move_Sprite(float x, float y, float rotate, Sprite* sprite);
 	// 描画する
-	void Draw(Texture* texture, Sprite* sprite);
-};
+	void Draw_Image(Texture* texture, Sprite* sprite);
 
-void Init(HINSTANCE hInstance);
+	// キー入力情報取得
+	void GetKeyState();
+	// キーが入力されているか
+	bool GetKey(unsigned char keycode);
+	// キーを押した瞬間
+	bool PushKey(unsigned char keycode);
+	// キーを離した瞬間
+	bool ReleaseKey(unsigned char keycode);
+};
