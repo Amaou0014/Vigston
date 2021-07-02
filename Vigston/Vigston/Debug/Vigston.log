@@ -1,4 +1,3 @@
 ﻿  main.cpp
 C:\Users\toydo\OneDrive\ドキュメント\GitHub\Vigston\Vigston\Vigston\main.cpp(5,5): warning C4007: 'WinMain': '__stdcall' でなければなりません。
-C:\Users\toydo\OneDrive\ドキュメント\GitHub\Vigston\Vigston\Vigston\main.cpp(57,41): warning C4002: 関数に似たマクロ呼び出し '_T' の引数が多すぎます
   Vigston.vcxproj -> C:\Users\toydo\OneDrive\ドキュメント\GitHub\Vigston\Vigston\Debug\Vigston.exe
