@@ -126,14 +126,14 @@ long Vigston::Get_Volume(SoundBuffer* sb)
 	return sb->GetVolume();
 }
 
-bool Vigston::Create_Font(int size)
+bool Vigston::Create_Font(int size, Text* text)
 {
-	return text.Create(direct3d.pDevice3D, size);
+	return text->Create(direct3d.pDevice3D, size);
 }
 
-void Vigston::Draw_Font(int x, int y, DWORD color, const TCHAR* str)
+void Vigston::Draw_Font(int x, int y, DWORD color, Text* text, const TCHAR* str , ...)
 {
-	text.Draw(x,y, color, str);
+	text->Draw(x,y, color, str);
 }
 
 void Vigston::Set_Sprite(float x, float y, int width, int height, float rotate, Sprite* sprite)

@@ -22,8 +22,6 @@ public:
 	MSG msg = {};
 	Keyboard keyboard;
 
-	Text text;
-
 	bool flag = false;
 
 	DWORD backColor;
@@ -76,8 +74,8 @@ public:
 	// 音量取得
 	long Get_Volume(SoundBuffer* sb);
 
-	bool Create_Font(int size = 16);
-	void Draw_Font(int x, int y, DWORD color,const TCHAR* str);
+	bool Create_Font(int size, Text* text);
+	void Draw_Font(int x, int y, DWORD color, Text* text, const TCHAR* str, ...);
 
 	// 描画位置セット
 	void Set_Sprite(float x, float y, int width, int height, float rotate, Sprite* sprite);
