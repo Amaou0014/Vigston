@@ -158,20 +158,35 @@ void Vigston::Draw_Image(Texture* texture, Sprite* sprite)
 
 void Vigston::GetKeyState()
 {
-	keyboard.GetKeyState();
+	device.GetKeyState();
 }
 
 bool Vigston::GetKey(unsigned char keycode)
 {
-	return keyboard.GetKey(keycode);
+	return device.GetKey(keycode);
 }
 
 bool Vigston::PushKey(unsigned char keycode)
 {
-	return keyboard.PushKey(keycode);
+	return device.PushKey(keycode);
 }
 
 bool Vigston::ReleaseKey(unsigned char keycode)
 {
-	return keyboard.ReleaseKey(keycode);
+	return device.ReleaseKey(keycode);
+}
+
+void Vigston::GetMouseState()
+{
+	device.GetMouseState();
+}
+
+int Vigston::GetMouseX()
+{
+	return device.GetMouseX();
+}
+
+int Vigston::GetMouseY()
+{
+	return device.GetMouseY();
 }
