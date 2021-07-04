@@ -48,10 +48,8 @@ bool Text::Create(IDirect3DDevice9* pD3DDevice, int size)
 
 
 // 文字列の描画
-void Text::Draw(int x, int y, DWORD color, const TCHAR* str, ...)
+void Text::Draw(int x, int y, DWORD color, const TCHAR* str, va_list args)
 {
-	va_list args;
-	va_start(args, str);					// 可変引数の最初の要素を格納する
 	int len = _vsctprintf(str, args) + 1;	// 文字数カウント、ヌル文字分加える
 	if (Buf.size() < (UINT)len)
 		Buf.resize(len);					// 文字サイズ分動的にメモリ確保

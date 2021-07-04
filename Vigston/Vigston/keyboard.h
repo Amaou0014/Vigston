@@ -163,19 +163,21 @@
 #define KEY_CODE_PA1                    0xFD
 #define KEY_CODE_OEM_CLEAR              0xFE
 
-static bool flg_p = false;
-static bool trigger = false;
-
+// キー入力クラス
 class Keyboard
 {
 public:
+	// 現在のキー入力取得
 	void GetKeyState();
+	// 指定されたキーが押されているのか
 	bool GetKey(unsigned char keycode);
+	// 指定されたキーが押された瞬間
 	bool PushKey(unsigned char keycode);
+	// 指定されたキーが離れた瞬間
 	bool ReleaseKey(unsigned char keycode);
 
 private:
 	const int isInputNum = 0x80;
-	BYTE key[256];
-	BYTE keybuf[256];
+	BYTE key[256];      // 今のフレームでのキー入力情報
+	BYTE keybuf[256];   // 一個前のフレームでのキー入力情報
 };

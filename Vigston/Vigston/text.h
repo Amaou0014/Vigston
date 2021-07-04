@@ -21,5 +21,5 @@ public:
 	bool Create(IDirect3DDevice9* pD3DDevice, int size = 16);
 
 	// •¶Žš—ñ‚Ì•`‰æ
-	void Draw( int x, int y, DWORD color, const TCHAR* str, ...);
+	void Draw( int x, int y, DWORD color, const TCHAR* str, va_list args);
 };
