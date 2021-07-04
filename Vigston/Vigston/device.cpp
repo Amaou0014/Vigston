@@ -1,7 +1,30 @@
-#include "keyboard.h"
+#include "device.h"
 
 
-void Keyboard::GetKeyState()
+Device::Device()
+{
+}
+
+Device::~Device()
+{
+}
+
+void Device::GetMouseState()
+{
+	GetCursorPos(&pos);
+}
+
+int Device::GetMouseX()
+{
+	return pos.x;
+}
+
+int Device::GetMouseY()
+{
+	return pos.y;
+}
+
+void Device::GetKeyState()
 {
 	for (int i = 0; i < 256; i++)
 	{
@@ -14,7 +37,7 @@ void Keyboard::GetKeyState()
 	}
 }
 
-bool Keyboard::GetKey(unsigned char keycode)
+bool Device::GetKey(unsigned char keycode)
 {
 	if (key[keycode] & isInputNum)
 	{
@@ -26,7 +49,7 @@ bool Keyboard::GetKey(unsigned char keycode)
 	}
 }
 
-bool Keyboard::PushKey(unsigned char keycode)
+bool Device::PushKey(unsigned char keycode)
 {
 	if (key[keycode] & isInputNum)
 	{
@@ -39,7 +62,7 @@ bool Keyboard::PushKey(unsigned char keycode)
 	return false;
 }
 
-bool Keyboard::ReleaseKey(unsigned char keycode)
+bool Device::ReleaseKey(unsigned char keycode)
 {
 	if (!(key[keycode] & isInputNum))
 	{

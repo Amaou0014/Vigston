@@ -143,9 +143,9 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="device.cpp" />
     <ClCompile Include="direct3d.cpp" />
     <ClCompile Include="directsound.cpp" />
-    <ClCompile Include="keyboard.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="soundbuffer.cpp" />
     <ClCompile Include="sprite.cpp" />
@@ -156,9 +156,9 @@
     <ClCompile Include="window.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="device.h" />
     <ClInclude Include="direct3d.h" />
     <ClInclude Include="directsound.h" />
-    <ClInclude Include="keyboard.h" />
     <ClInclude Include="soundbuffer.h" />
     <ClInclude Include="sprite.h" />
     <ClInclude Include="text.h" />

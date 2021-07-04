@@ -34,6 +34,7 @@ int WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int n
 				vigston.Clear_Screen();
 
 				vigston.GetKeyState();
+				vigston.GetMouseState();
 
 				
 
@@ -54,9 +55,26 @@ int WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int n
 					vigston.Move_Sprite(10, 0, 0, &sp_slime);
 				}
 
+				if (vigston.GetKey(KEY_CODE_LEFTMOUSE))
+				{
+					vigston.Draw_Font(300, 0, 0xffff0000, &text, _T("左クリック！！"));
+				}
+
+				if (vigston.GetKey(KEY_CODE_RIGHTMOUSE))
+				{
+					vigston.Draw_Font(300, 0, 0xffff0000, &text, _T("右クリック！！"));
+				}
+
+				if (vigston.GetKey(KEY_CODE_SENTERMOUSE))
+				{
+					vigston.Draw_Font(300, 0, 0xffff0000, &text, _T("ホイールクリック！！"));
+				}
+
+
 				// 描画処理
 				vigston.Draw_Image(&tex_slime, &sp_slime);
 				vigston.Draw_Font(0, 0, 0xffff0000,&text, _T("x = %.1f\ny = %.1f"), sp_slime.pos.x, sp_slime.pos.y);
+				vigston.Draw_Font(200, 0, 0xffff0000, &text, _T("x = %d\ny = %d"), vigston.GetMouseX(), vigston.GetMouseY());
 				// レンダリング終了
 				vigston.End_Scene();
 			}

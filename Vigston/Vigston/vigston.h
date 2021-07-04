@@ -7,7 +7,7 @@
 #include "directsound.h"
 #include "wave.h"
 #include "soundbuffer.h"
-#include "keyboard.h"
+#include "device.h"
 #include "window.h"
 
 
@@ -20,7 +20,8 @@ public:
 	Window window;
 
 	MSG msg = {};
-	Keyboard keyboard;
+
+	Device device;
 
 	bool flag = false;
 
@@ -84,7 +85,7 @@ public:
 	// 描画する
 	void Draw_Image(Texture* texture, Sprite* sprite);
 
-	// キー入力情報取得
+	// キー情報取得
 	void GetKeyState();
 	// キーが入力されているか
 	bool GetKey(unsigned char keycode);
@@ -92,4 +93,11 @@ public:
 	bool PushKey(unsigned char keycode);
 	// キーを離した瞬間
 	bool ReleaseKey(unsigned char keycode);
+
+	// マウス情報取得
+	void GetMouseState();
+	// マウスX座標取得
+	int GetMouseX();
+	// マウスY座標取得
+	int GetMouseY();
 };

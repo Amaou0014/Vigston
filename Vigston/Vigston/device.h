@@ -163,9 +163,18 @@
 #define KEY_CODE_PA1                    0xFD
 #define KEY_CODE_OEM_CLEAR              0xFE
 
-// キー入力クラス
-class Keyboard
+class Device
 {
+public:
+	Device();
+	~Device();
+public:
+	// 現在のマウス情報取得
+	void GetMouseState();
+	// マウスX座標取得
+	int GetMouseX();
+	// マウスY座標取得
+	int GetMouseY();
 public:
 	// 現在のキー入力取得
 	void GetKeyState();
@@ -177,6 +186,8 @@ public:
 	bool ReleaseKey(unsigned char keycode);
 
 private:
+	POINT pos;
+
 	const int isInputNum = 0x80;
 	BYTE key[256];      // 今のフレームでのキー入力情報
 	BYTE keybuf[256];   // 一個前のフレームでのキー入力情報
