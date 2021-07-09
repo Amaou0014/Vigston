@@ -13,6 +13,7 @@ int WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int n
 
 	vigston.Init(hInstance);
 
+	vigston.Load_Sound("SE1",(TCHAR*)_T("Resources/maou_retoro_1.wav"));
 	vigston.Load_Texture((TCHAR*)_T("Resources/Slime.png"), &tex_slime);
 	vigston.Set_Sprite(100, 100, 128, 128, 0, &sp_slime);
 	vigston.Create_Font(32, &text);
@@ -53,6 +54,17 @@ int WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int n
 				if (vigston.GetKey(KEY_CODE_D))
 				{
 					vigston.Move_Sprite(10, 0, 0, &sp_slime);
+				}
+
+				if (vigston.PushKey(KEY_CODE_R))
+				{
+					vigston.Play_Sound("SE1", false);
+					vigston.Move_Sprite(0, 0, 5, &sp_slime);
+				}
+
+				if (vigston.PushKey(KEY_CODE_T))
+				{
+					vigston.Move_Sprite(0, 0, 5, &sp_slime);
 				}
 
 				if (vigston.GetKey(KEY_CODE_LEFTMOUSE))
