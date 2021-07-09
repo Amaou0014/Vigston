@@ -12,6 +12,12 @@ struct AnimationNum{
 class Sprite
 {
 public:
+	// レンダーステートの設定
+	enum RENDERSTATE
+	{
+		RENDER_DEFAULT,		// デフォルト(不透明)
+		RENDER_ALPHATEST	// αテスト
+	};
 	// 板ポリゴン頂点情報
 	struct Vertex{
 		float x,y,z;// 3次元座標
@@ -43,6 +49,8 @@ public:
 	void Set_Pos(float x,float y);
 	void Set_Width(int Width,int Height);
 	void Set_Rotate(float Rotate);
+
+	void SetRenderState(IDirect3DDevice9* pD3DDevice, RENDERSTATE RenderState);
 
 	float Get_PosX();
 	float Get_PosY();

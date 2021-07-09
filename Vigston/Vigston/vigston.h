@@ -4,9 +4,7 @@
 #include "texture.h"
 #include "sprite.h"
 #include "text.h"
-#include "directsound.h"
-#include "wave.h"
-#include "soundbuffer.h"
+#include "sound.h"
 #include "device.h"
 #include "window.h"
 
@@ -15,7 +13,7 @@ class Vigston
 {
 public:
 	Direct3D	direct3d;
-	DirectSound	directsound;
+	Sound* sound;
 
 	Window window;
 
@@ -67,15 +65,17 @@ public:
 	bool Load_Texture(TCHAR* name, Texture* texture);
 
 	// 音声読み込み
-	bool Load_Sound(TCHAR* name, Wave* wave, SoundBuffer* sb);
+	bool Load_Sound(const char* keyname, TCHAR* name);
 	// 音声再生
-	void Play_Sound(bool isLoop, SoundBuffer* sb);
+	void Play_Sound(const char* keyname, bool isLoop);
 	// 音量変更
-	void Set_Volume(long _volume, SoundBuffer* sb);
+	void Set_Volume(const char* keyname, long _volume);
 	// 音量取得
-	long Get_Volume(SoundBuffer* sb);
+	long Get_Volume(const char* keyname);
 
+	// フォント作成
 	bool Create_Font(int size, Text* text);
+	// フォント描画
 	void Draw_Font(int x, int y, DWORD color, Text* text, const TCHAR* str...);
 
 	// 描画位置セット

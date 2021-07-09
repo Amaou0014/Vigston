@@ -33,6 +33,28 @@ void Sprite::Set_Rotate(float Rotate)
 	rotate = Rotate;
 }
 
+void Sprite::SetRenderState(IDirect3DDevice9* pD3DDevice, RENDERSTATE RenderState)
+{
+	switch (RenderState)
+	{
+	case RENDER_DEFAULT:
+	{
+		// 不透明オブジェクト
+		pD3DDevice->SetRenderState(D3DRS_ALPHATESTENABLE, FALSE);		//アルファテストの無効化
+	}
+	break;
+	case RENDER_ALPHATEST:
+	{
+		// αテストによる透明領域の切り抜き
+		pD3DDevice->SetRenderState(D3DRS_ALPHATESTENABLE, TRUE);		//アルファテストの有効化
+		pD3DDevice->SetRenderState(D3DRS_ALPHAREF, 0x80);			//アルファ参照値
+		pD3DDevice->SetRenderState(D3DRS_ALPHAFUNC, D3DCMP_GREATEREQUAL);	//アルファテスト合格基準
+
+	}
+	break;
+	}
+}
+
 float Sprite::Get_PosX()
 {
 	return pos.x;

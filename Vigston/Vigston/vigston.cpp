@@ -2,7 +2,7 @@
 
 Vigston::Vigston()
 {
-
+	sound = new Sound();
 }
 
 Vigston::~Vigston()
@@ -17,7 +17,7 @@ void Vigston::Init(HINSTANCE hInstance)
 	// Direct3Dì¬
 	direct3d.Create(window.hwnd, window.w, window.h);
 	// DirectSoundì¬
-	directsound.Create(window.hwnd);
+	sound->Create_Device(window.hwnd);
 	// «ŠeƒvƒƒOƒ‰ƒ€‚Ì‰Šú‰»‚ð“®‚©‚·«
 }
 
@@ -98,10 +98,10 @@ bool Vigston::Load_Texture(TCHAR* _name, Texture* _texture)
 	return _texture->Load(direct3d.pDevice3D, _name);
 }
 
-bool Vigston::Load_Sound(TCHAR* name, Wave* wave, SoundBuffer* sb)
+bool Vigston::Load_Sound(const char* keyname, TCHAR* name)
 {
-	if (wave->Load(name) &&
-		sb->Create(directsound.pDirectSound8, &wave->WaveFormat, wave->WaveData, wave->DataSize))
+	if (sound->Load_Wave(keyname, name) &&
+		sound->Create_Buffer(keyname))
 	{
 		return true;
 	}
@@ -111,19 +111,19 @@ bool Vigston::Load_Sound(TCHAR* name, Wave* wave, SoundBuffer* sb)
 	}
 }
 
-void Vigston::Play_Sound(bool isLoop, SoundBuffer* sb)
+void Vigston::Play_Sound(const char* keyname, bool isLoop)
 {
-	sb->Play(isLoop);
+	sound->Play(keyname, isLoop);
 }
 
-void Vigston::Set_Volume(long _volume, SoundBuffer* sb)
+void Vigston::Set_Volume(const char* keyname, long _volume)
 {
-	sb->SetVolume(_volume);
+	sound->SetVolume(keyname, _volume);
 }
 
-long Vigston::Get_Volume(SoundBuffer* sb)
+long Vigston::Get_Volume(const char* keyname)
 {
-	return sb->GetVolume();
+	return sound->GetVolume(keyname);
 }
 
 bool Vigston::Create_Font(int size, Text* text)
@@ -153,6 +153,7 @@ void Vigston::Move_Sprite(float x, float y, float rotate, Sprite* sprite)
 
 void Vigston::Draw_Image(Texture* texture, Sprite* sprite)
 {
+	sprite->SetRenderState(direct3d.pDevice3D, sprite->RENDER_ALPHATEST);
 	sprite->Draw(direct3d.pDevice3D, texture->pTexture);
 }
 
