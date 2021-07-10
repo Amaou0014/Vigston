@@ -1,7 +1,7 @@
 #pragma once
 
 #include "direct3d.h"
-#include "texture.h"
+#include "image.h"
 #include "sprite.h"
 #include "text.h"
 #include "sound.h"
@@ -62,7 +62,7 @@ public:
 	void ScreenFlip();
 
 	// ‰æ‘œ“Ç‚İ‚İ
-	bool Load_Texture(TCHAR* name, Texture* texture);
+	bool Load_Texture(TCHAR* name, Image* image);
 
 	// ‰¹º“Ç‚İ‚İ
 	bool Load_Sound(const char* keyname, TCHAR* name);
@@ -83,7 +83,7 @@ public:
 	// •`‰æˆÊ’u‚ğ“®‚©‚·
 	void Move_Sprite(float x, float y, float rotate, Sprite* sprite);
 	// •`‰æ‚·‚é
-	void Draw_Image(Texture* texture, Sprite* sprite);
+	void Draw_Image(Image* image, Sprite* sprite);
 
 	// ƒL[î•ñæ“¾
 	void GetKeyState();

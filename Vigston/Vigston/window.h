@@ -1,5 +1,7 @@
 #pragma once
+
 #include <windows.h>
+
 class Window
 {
     TCHAR WINDOW_CLASS_NAME[1024];

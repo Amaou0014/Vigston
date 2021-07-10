@@ -145,21 +145,23 @@
   <ItemGroup>
     <ClCompile Include="device.cpp" />
     <ClCompile Include="direct3d.cpp" />
+    <ClCompile Include="engine.cpp" />
+    <ClCompile Include="image.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="sound.cpp" />
     <ClCompile Include="sprite.cpp" />
     <ClCompile Include="text.cpp" />
-    <ClCompile Include="texture.cpp" />
     <ClCompile Include="vigston.cpp" />
     <ClCompile Include="window.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="device.h" />
     <ClInclude Include="direct3d.h" />
+    <ClInclude Include="engine.h" />
+    <ClInclude Include="image.h" />
     <ClInclude Include="sound.h" />
     <ClInclude Include="sprite.h" />
     <ClInclude Include="text.h" />
-    <ClInclude Include="texture.h" />
     <ClInclude Include="vigston.h" />
     <ClInclude Include="window.h" />
   </ItemGroup>

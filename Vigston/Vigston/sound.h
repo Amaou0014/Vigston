@@ -32,18 +32,18 @@ public:
 	~Sound();
 
 	// サウンドデバイス初期化
-	void Init_Device();
+	void Init_SoundDevice();
 	// サウンドデバイス解放
-	void Release_Device();
+	void Release_SoundDevice();
 	// サウンドデバイス作成
-	bool Create_Device(HWND hWnd);
+	bool Create_SoundDevice(HWND hWnd);
 
 	// Wave初期化
 	void Init_Wave();
 	// Wave解放
 	void Release_Wave();
 	// Waveファイル読み込み
-	bool Load_Wave(const char* keyname, TCHAR* filename);
+	bool Load_Wave(TCHAR* filename);
 
 	// セカンダリバッファ初期化
 	void Init_Buffer();

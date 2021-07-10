@@ -4,24 +4,24 @@
 
 Sound::Sound()
 {
-	Init_Device();
+	Init_SoundDevice();
 	Init_Wave();
 	Init_Buffer();
 }
 
 Sound::~Sound()
 {
-	Release_Device();
+	Release_SoundDevice();
 	Release_Wave();
 	Release_Buffer();
 }
 
-void Sound::Init_Device()
+void Sound::Init_SoundDevice()
 {
 	pDirectSound8 = NULL;
 }
 
-void Sound::Release_Device()
+void Sound::Release_SoundDevice()
 {
 	if (pDirectSound8 != NULL)
 	{
@@ -29,7 +29,7 @@ void Sound::Release_Device()
 	}
 }
 
-bool Sound::Create_Device(HWND hWnd)
+bool Sound::Create_SoundDevice(HWND hWnd)
 {
 	// サウンドデバイス作成
 	DirectSoundCreate8(NULL, &pDirectSound8, NULL);
@@ -61,7 +61,7 @@ void Sound::Release_Wave()
 	delete wave;
 }
 
-bool Sound::Load_Wave(const char* name, TCHAR* filename)
+bool Sound::Load_Wave(TCHAR* filename)
 {
 	// バイナリ読み込みモードで開く
 	FILE* fp;
