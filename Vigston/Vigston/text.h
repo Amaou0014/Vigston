@@ -1,6 +1,7 @@
 #pragma once
 
 #include "direct3d.h"
+
 #include <vector>
 #include <tchar.h>
 

@@ -26,15 +26,3 @@ public:
 	// デバイス作成
 	bool Create(HWND hWnd,int Width,int Height);
 };
-
-// レンダーステートの設定
-enum RENDERSTATE
-{
-	RENDER_DEFAULT,		// デフォルト(不透明)
-	RENDER_ALPHATEST,	// αテスト
-	RENDER_HALFADD,		// 半加算合成
-	RENDER_ADD			// 加算合成
-};
-
-// レンダーステートの変更
-void SetRenderState(IDirect3DDevice9* pD3DDevice,RENDERSTATE RenderState);

@@ -17,7 +17,7 @@ void Vigston::Init(HINSTANCE hInstance)
 	// Direct3Dì¬
 	direct3d.Create(window.hwnd, window.w, window.h);
 	// DirectSoundì¬
-	sound->Create_Device(window.hwnd);
+	sound->Create_SoundDevice(window.hwnd);
 	// «ŠeƒvƒƒOƒ‰ƒ€‚Ì‰Šú‰»‚ð“®‚©‚·«
 }
 
@@ -93,14 +93,14 @@ void Vigston::ScreenFlip()
 }
 
 
-bool Vigston::Load_Texture(TCHAR* _name, Texture* _texture)
+bool Vigston::Load_Texture(TCHAR* _name, Image* image)
 {
-	return _texture->Load(direct3d.pDevice3D, _name);
+	return image->Load(direct3d.pDevice3D, _name);
 }
 
 bool Vigston::Load_Sound(const char* keyname, TCHAR* name)
 {
-	if (sound->Load_Wave(keyname, name) &&
+	if (sound->Load_Wave(name) &&
 		sound->Create_Buffer(keyname))
 	{
 		return true;
@@ -151,10 +151,10 @@ void Vigston::Move_Sprite(float x, float y, float rotate, Sprite* sprite)
 	sprite->Move_Rotate(rotate);
 }
 
-void Vigston::Draw_Image(Texture* texture, Sprite* sprite)
+void Vigston::Draw_Image(Image* image, Sprite* sprite)
 {
 	sprite->SetRenderState(direct3d.pDevice3D, sprite->RENDER_ALPHATEST);
-	sprite->Draw(direct3d.pDevice3D, texture->pTexture);
+	sprite->Draw(direct3d.pDevice3D, image->pTexture);
 }
 
 void Vigston::GetKeyState()
