@@ -149,7 +149,6 @@
     <ClCompile Include="image.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="sound.cpp" />
-    <ClCompile Include="sprite.cpp" />
     <ClCompile Include="text.cpp" />
     <ClCompile Include="vigston.cpp" />
     <ClCompile Include="window.cpp" />
@@ -160,7 +159,6 @@
     <ClInclude Include="engine.h" />
     <ClInclude Include="image.h" />
     <ClInclude Include="sound.h" />
-    <ClInclude Include="sprite.h" />
     <ClInclude Include="text.h" />
     <ClInclude Include="vigston.h" />
     <ClInclude Include="window.h" />
