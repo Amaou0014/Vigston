@@ -29,12 +29,12 @@ void Sound::Release_SoundDevice()
 	}
 }
 
-bool Sound::Create_SoundDevice(HWND hWnd)
+bool Sound::Create_SoundDevice(HWND hwnd)
 {
 	// サウンドデバイス作成
 	DirectSoundCreate8(NULL, &pDirectSound8, NULL);
 	// 協調レベルのセット
-	if (FAILED(pDirectSound8->SetCooperativeLevel(hWnd, DSSCL_PRIORITY)))
+	if (FAILED(pDirectSound8->SetCooperativeLevel(hwnd, DSSCL_PRIORITY)))
 	{
 		// 失敗
 		return false;

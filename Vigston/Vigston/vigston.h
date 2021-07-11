@@ -2,7 +2,6 @@
 
 #include "direct3d.h"
 #include "image.h"
-#include "sprite.h"
 #include "text.h"
 #include "sound.h"
 #include "device.h"
@@ -32,12 +31,12 @@ public:
 	/////////////////////////////////
 
 	// 初期化
-	void Init(HINSTANCE hInstance);
+	void Init();
 
 	/////////////////////////////////
 
 	// ウィンドウセット
-	void Set_Window(const TCHAR* name, const HINSTANCE hInst);
+	void Set_Window(const TCHAR* name);
 	// ウィンドウ座標セット
 	void Set_Window_Pos(int x, int y);
 	// ウィンドウ座標セット
@@ -79,11 +78,11 @@ public:
 	void Draw_Font(int x, int y, DWORD color, Text* text, const TCHAR* str...);
 
 	// 描画位置セット
-	void Set_Sprite(float x, float y, int width, int height, float rotate, Sprite* sprite);
+	void Set_Sprite(float x, float y, int width, int height, float rotate, Image* image);
 	// 描画位置を動かす
-	void Move_Sprite(float x, float y, float rotate, Sprite* sprite);
+	void Move_Sprite(float x, float y, float rotate, Image* image);
 	// 描画する
-	void Draw_Image(Image* image, Sprite* sprite);
+	void Draw_Image(Image* image);
 
 	// キー情報取得
 	void GetKeyState();

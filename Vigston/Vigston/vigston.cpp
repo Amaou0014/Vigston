@@ -10,9 +10,9 @@ Vigston::~Vigston()
 
 }
 
-void Vigston::Init(HINSTANCE hInstance)
+void Vigston::Init()
 {
-	Set_Window(_T("BASIC_WINDOW"), hInstance);
+	Set_Window(_T("BASIC_WINDOW"));
 	Create_Window(_T("VigstonApp"), WS_OVERLAPPEDWINDOW | WS_VISIBLE, nullptr, nullptr);
 	// Direct3Dì¬
 	direct3d.Create(window.hwnd, window.w, window.h);
@@ -21,9 +21,9 @@ void Vigston::Init(HINSTANCE hInstance)
 	// «ŠeƒvƒƒOƒ‰ƒ€‚Ì‰Šú‰»‚ð“®‚©‚·«
 }
 
-void Vigston::Set_Window(const TCHAR* name, const HINSTANCE hInst)
+void Vigston::Set_Window(const TCHAR* name)
 {
-	window.Set_Window(name, hInst);
+	window.Set_Window(name);
 }
 
 void Vigston::Set_Window_Pos(int x, int y)
@@ -138,23 +138,23 @@ void Vigston::Draw_Font(int x, int y, DWORD color, Text* text, const TCHAR* str.
 	text->Draw(x,y, color, str, args);
 }
 
-void Vigston::Set_Sprite(float x, float y, int width, int height, float rotate, Sprite* sprite)
+void Vigston::Set_Sprite(float x, float y, int width, int height, float rotate, Image* image)
 {
-	sprite->Set_Pos(x, y);
-	sprite->Set_Width(width, height);
-	sprite->Set_Rotate(rotate);
+	image->Set_Pos(x, y);
+	image->Set_Width(width, height);
+	image->Set_Rotate(rotate);
 }
 
-void Vigston::Move_Sprite(float x, float y, float rotate, Sprite* sprite)
+void Vigston::Move_Sprite(float x, float y, float rotate, Image* image)
 {
-	sprite->Move_Pos(x,y);
-	sprite->Move_Rotate(rotate);
+	image->Move_Pos(x,y);
+	image->Move_Rotate(rotate);
 }
 
-void Vigston::Draw_Image(Image* image, Sprite* sprite)
+void Vigston::Draw_Image(Image* image)
 {
-	sprite->SetRenderState(direct3d.pDevice3D, sprite->RENDER_ALPHATEST);
-	sprite->Draw(direct3d.pDevice3D, image->pTexture);
+	image->SetRenderState(direct3d.pDevice3D, image->RENDER_ALPHATEST);
+	image->Draw(direct3d.pDevice3D, image->pTexture);
 }
 
 void Vigston::GetKeyState()

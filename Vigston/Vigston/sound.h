@@ -36,7 +36,7 @@ public:
 	// サウンドデバイス解放
 	void Release_SoundDevice();
 	// サウンドデバイス作成
-	bool Create_SoundDevice(HWND hWnd);
+	bool Create_SoundDevice(HWND hwnd);
 
 	// Wave初期化
 	void Init_Wave();

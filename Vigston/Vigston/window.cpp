@@ -8,15 +8,22 @@ Window::Window()
     w = 640;
     h = 480;
 }
+
 Window::~Window()
 {
 
 }
+
+void Window::Init(const TCHAR* name, LPCTSTR win_name, DWORD dwStyle, HWND hWndParent, HMENU hMenu)
+{
+    Set_Window(name);
+    Create_Window(win_name, dwStyle, hWndParent, hMenu);
+}
+
 // ウィンドウを作成する
-bool Window::Set_Window(const TCHAR* name, const HINSTANCE hInst)
+bool Window::Set_Window(const TCHAR* name)
 {
     _tcscpy_s(WINDOW_CLASS_NAME, name);
-    hInstance = hInst;
     WNDCLASSEX wc;
 
     // ウィンドウクラスの情報を設定
@@ -25,7 +32,7 @@ bool Window::Set_Window(const TCHAR* name, const HINSTANCE hInst)
     wc.lpfnWndProc = Window::StaticWndProc; // ウィンドウプロシージャ
     wc.cbClsExtra = 0;
     wc.cbWndExtra = 0;
-    wc.hInstance = hInst;                     // インスタンスハンドル
+    wc.hInstance = NULL;                     // インスタンスハンドル
     wc.hIcon = (HICON)LoadIcon(NULL, IDI_APPLICATION);
     wc.hIconSm = wc.hIcon;
     wc.hCursor = (HCURSOR)LoadCursor(NULL, IDC_ARROW);
@@ -87,7 +94,7 @@ bool Window::Create_Window(
         h,            // ウィンドウの高さ
         hWndParent,            // 親ウィンドウのウィンドウハンドル
         hMenu,               // メニューハンドル
-        hInstance,         // インスタンスハンドル
+        nullptr,         // インスタンスハンドル
         this               // その他の作成データ
     );
 

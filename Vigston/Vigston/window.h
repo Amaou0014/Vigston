@@ -13,7 +13,6 @@ class Window
         LPARAM lp);
 public:
     HWND hwnd;
-    HINSTANCE hInstance;
     int x;
     int y;
     int w;
@@ -22,8 +21,11 @@ public:
     Window();
     virtual ~Window();
 
+    // ウィンドウ初期化
+    void Init(const TCHAR* name, LPCTSTR win_name, DWORD dwStyle, HWND hWndParent, HMENU hMenu);
+
     // ウィンドウセット
-    bool Set_Window(const TCHAR* name, const HINSTANCE hInst);
+    bool Set_Window(const TCHAR* name);
     // ウィンドウ座標セット
     void Set_Pos(int _x, int _y);
     // ウィンドウX座標取得
@@ -41,7 +43,6 @@ public:
     virtual LRESULT WndProc(HWND hwnd, UINT msg, WPARAM wp, LPARAM lp);
 
     HWND GetHWND()const { return hwnd; }
-    HINSTANCE GetHINSTANCE()const { return hInstance; }
 
     // ウィンドウ作成
     bool Create_Window(
