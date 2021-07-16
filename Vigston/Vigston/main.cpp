@@ -6,15 +6,13 @@ int WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int n
 {
 	Vigston vigston;
 
-	Image image_slime;
-
 	Text text;
 
 	vigston.Init();
 
 	vigston.Load_Sound("SE1",(TCHAR*)_T("Resources/maou_retoro_1.wav"));
-	vigston.Load_Texture((TCHAR*)_T("Resources/Slime.png"), &image_slime);
-	vigston.Set_Sprite(100, 100, 128, 128, 0, &image_slime);
+	vigston.Load_Image("Slime",(TCHAR*)_T("Resources/Slime.png"));
+	vigston.Set_Image("Slime", 100, 100, 128, 128, 0);
 	vigston.Create_Font(32, &text);
 
 	while (!vigston.GameQuit())
@@ -40,30 +38,30 @@ int WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int n
 
 				if (vigston.GetKey(KEY_CODE_W))
 				{
-					vigston.Move_Sprite(0, -10, 0, &image_slime);
+					vigston.Move_Image("Slime", 0, -10, 0);
 				}
 				if (vigston.GetKey(KEY_CODE_A))
 				{
-					vigston.Move_Sprite(-10, 0, 0, &image_slime);
+					vigston.Move_Image("Slime", -10, 0, 0);
 				}
 				if (vigston.GetKey(KEY_CODE_S))
 				{
-					vigston.Move_Sprite(0, 10, 0, &image_slime);
+					vigston.Move_Image("Slime", 0, 10, 0);
 				}
 				if (vigston.GetKey(KEY_CODE_D))
 				{
-					vigston.Move_Sprite(10, 0, 0, &image_slime);
+					vigston.Move_Image("Slime", 10, 0, 0);
 				}
 
 				if (vigston.PushKey(KEY_CODE_R))
 				{
 					vigston.Play_Sound("SE1", false);
-					vigston.Move_Sprite(0, 0, 5, &image_slime);
+					vigston.Move_Image("Slime", 0, 0, 5);
 				}
 
 				if (vigston.PushKey(KEY_CODE_T))
 				{
-					vigston.Move_Sprite(0, 0, 5, &image_slime);
+					vigston.Move_Image("Slime", 0, 0, 5);
 				}
 
 				if (vigston.GetKey(KEY_CODE_LEFTMOUSE))
@@ -83,8 +81,8 @@ int WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int n
 
 
 				// ï`âÊèàóù
-				vigston.Draw_Image(&image_slime);
-				vigston.Draw_Font(0, 0, 0xffff0000,&text, _T("x = %.1f\ny = %.1f"), image_slime.pos.x, image_slime.pos.y);
+				vigston.Draw_Image("Slime");
+				vigston.Draw_Font(0, 0, 0xffff0000,&text, _T("x = %.1f\ny = %.1f"), vigston.Get_Image_PosX("Slime"), vigston.Get_Image_PosY("Slime"));
 				vigston.Draw_Font(200, 0, 0xffff0000, &text, _T("x = %d\ny = %d"), vigston.GetMouseX(), vigston.GetMouseY());
 				// ÉåÉìÉ_ÉäÉìÉOèIóπ
 				vigston.End_Scene();

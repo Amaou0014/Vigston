@@ -13,6 +13,7 @@ class Vigston
 public:
 	Direct3D	direct3d;
 	Sound* sound;
+	Image* image;
 
 	Window window;
 
@@ -61,7 +62,17 @@ public:
 	void ScreenFlip();
 
 	// 画像読み込み
-	bool Load_Texture(TCHAR* name, Image* image);
+	bool Load_Image(const char* keyname, TCHAR* name);
+	// 描画位置セット
+	void Set_Image(const char* keyname, float x, float y, int width, int height, float rotate);
+	// 描画位置を動かす
+	void Move_Image(const char* keyname, float x, float y, float rotate);
+	// 描画座標X取得
+	float Get_Image_PosX(const char* keyname);
+	// 描画座標Y取得
+	float Get_Image_PosY(const char* keyname);
+	// 描画する
+	void Draw_Image(const char* keyname, bool isTurn = false);
 
 	// 音声読み込み
 	bool Load_Sound(const char* keyname, TCHAR* name);
@@ -76,13 +87,6 @@ public:
 	bool Create_Font(int size, Text* text);
 	// フォント描画
 	void Draw_Font(int x, int y, DWORD color, Text* text, const TCHAR* str...);
-
-	// 描画位置セット
-	void Set_Sprite(float x, float y, int width, int height, float rotate, Image* image);
-	// 描画位置を動かす
-	void Move_Sprite(float x, float y, float rotate, Image* image);
-	// 描画する
-	void Draw_Image(Image* image);
 
 	// キー情報取得
 	void GetKeyState();
