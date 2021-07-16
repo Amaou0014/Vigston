@@ -14,6 +14,7 @@ public:
 	Direct3D	direct3d;
 	Sound* sound;
 	Image* image;
+	Text* text;
 
 	Window window;
 
@@ -84,9 +85,9 @@ public:
 	long Get_Volume(const char* keyname);
 
 	// フォント作成
-	bool Create_Font(int size, Text* text);
+	bool Create_Font(int size);
 	// フォント描画
-	void Draw_Font(int x, int y, DWORD color, Text* text, const TCHAR* str...);
+	void Draw_Font(int x, int y, DWORD color, const TCHAR* str...);
 
 	// キー情報取得
 	void GetKeyState();
