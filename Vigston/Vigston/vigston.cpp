@@ -3,6 +3,7 @@
 Vigston::Vigston()
 {
 	sound = new Sound();
+	image = new Image();
 }
 
 Vigston::~Vigston()
@@ -93,9 +94,38 @@ void Vigston::ScreenFlip()
 }
 
 
-bool Vigston::Load_Texture(TCHAR* _name, Image* image)
+bool Vigston::Load_Image(const char* keyname, TCHAR* _name)
 {
-	return image->Load(direct3d.pDevice3D, _name);
+	return image->Load(keyname, direct3d.pDevice3D, _name);
+}
+
+void Vigston::Set_Image(const char* keyname, float x, float y, int width, int height, float rotate)
+{
+	image->Set_Pos(keyname, x, y);
+	image->Set_Width(keyname, width, height);
+	image->Set_Rotate(keyname, rotate);
+}
+
+void Vigston::Move_Image(const char* keyname, float x, float y, float rotate)
+{
+	image->Move_Pos(keyname, x, y);
+	image->Move_Rotate(keyname, rotate);
+}
+
+float Vigston::Get_Image_PosX(const char* keyname)
+{
+	return image->Get_PosX(keyname);
+}
+
+float Vigston::Get_Image_PosY(const char* keyname)
+{
+	return image->Get_PosY(keyname);
+}
+
+void Vigston::Draw_Image(const char* keyname, bool isTurn)
+{
+	image->SetRenderState(direct3d.pDevice3D, image->RENDER_ALPHATEST);
+	image->Draw(keyname, direct3d.pDevice3D, isTurn);
 }
 
 bool Vigston::Load_Sound(const char* keyname, TCHAR* name)
@@ -136,25 +166,6 @@ void Vigston::Draw_Font(int x, int y, DWORD color, Text* text, const TCHAR* str.
 	va_list args;
 	va_start(args, str);   // ‰Â•Ïˆø”‚ÌÅ‰‚Ì—v‘f‚ðŠi”[‚·‚é
 	text->Draw(x,y, color, str, args);
-}
-
-void Vigston::Set_Sprite(float x, float y, int width, int height, float rotate, Image* image)
-{
-	image->Set_Pos(x, y);
-	image->Set_Width(width, height);
-	image->Set_Rotate(rotate);
-}
-
-void Vigston::Move_Sprite(float x, float y, float rotate, Image* image)
-{
-	image->Move_Pos(x,y);
-	image->Move_Rotate(rotate);
-}
-
-void Vigston::Draw_Image(Image* image)
-{
-	image->SetRenderState(direct3d.pDevice3D, image->RENDER_ALPHATEST);
-	image->Draw(direct3d.pDevice3D, image->pTexture);
 }
 
 void Vigston::GetKeyState()

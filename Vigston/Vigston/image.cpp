@@ -6,48 +6,84 @@
 
 Image::Image()
 {
-	pTexture = NULL;
+	if (!textureList.empty())
+	{
+		textureList.clear();
+	}
 
-	pos.x = 0.0f;
-	pos.y = 0.0f;
-	width = 0;
-	height = 0;
-	divU = 1;
-	divV = 1;
-	numU = 0;
-	numV = 0;
-	rotate = 0.0f;
+	if (!spriteList.empty())
+	{
+		spriteList.clear();
+	}
 }
 Image::~Image()
 {
-	// 読み込まれていたら破棄
-	if (pTexture != NULL)
-		pTexture->Release();
+	// テクスチャ読み込まれていたら破棄
+	for (auto tex = textureList.begin(); tex != textureList.end(); tex++)
+	{
+		if (tex->second != nullptr)
+		{
+			tex->second->Release();
+			tex->second = nullptr;
+		}
+	}
+
+	textureList.clear();
+
+	// スプライト読み込まれていたら破棄
+	for (auto sp = spriteList.begin(); sp != spriteList.end(); sp++)
+	{
+		if (sp->second != nullptr)
+		{
+			delete sp->second;
+			sp->second = nullptr;
+		}
+	}
+
+	spriteList.clear();
 }
-bool Image::Load(IDirect3DDevice9* pDevice3D, TCHAR* FileName)
+bool Image::Load(const char* keyname, IDirect3DDevice9* pDevice3D, TCHAR* FileName)
 {
+	if (spriteList[keyname] == NULL)
+	{
+		spriteList[keyname] = new Sprite();
+
+		spriteList[keyname]->pos.x = 0.0f;
+		spriteList[keyname]->pos.y = 0.0f;
+		spriteList[keyname]->width = 0;
+		spriteList[keyname]->height = 0;
+		spriteList[keyname]->divU = 1;
+		spriteList[keyname]->divV = 1;
+		spriteList[keyname]->numU = 0;
+		spriteList[keyname]->numV = 0;
+		spriteList[keyname]->rotate = 0.0f;
+	}
 	// 画像読み込み
-	if (FAILED(D3DXCreateTextureFromFile(pDevice3D, FileName, &pTexture)))
+	if (FAILED(D3DXCreateTextureFromFile(pDevice3D, FileName, &textureList[keyname])))
+	{
 		return false;	// 失敗
-
-	// 成功
-	return true;
+	}
+	else
+	{
+		// 成功
+		return true;
+	}
 }
 
-void Image::Set_Pos(float x, float y)
+void Image::Set_Pos(const char* keyname, float x, float y)
 {
-	pos.x = x;
-	pos.y = y;
+	spriteList[keyname]->pos.x = x;
+	spriteList[keyname]->pos.y = y;
 }
-void Image::Set_Width(int Width, int Height)
+void Image::Set_Width(const char* keyname, int Width, int Height)
 {
-	width = Width;
-	height = Height;
+	spriteList[keyname]->width = Width;
+	spriteList[keyname]->height = Height;
 }
 
-void Image::Set_Rotate(float Rotate)
+void Image::Set_Rotate(const char* keyname, float Rotate)
 {
-	rotate = Rotate;
+	spriteList[keyname]->rotate = Rotate;
 }
 
 void Image::SetRenderState(IDirect3DDevice9* pD3DDevice, RENDERSTATE RenderState)
@@ -72,83 +108,89 @@ void Image::SetRenderState(IDirect3DDevice9* pD3DDevice, RENDERSTATE RenderState
 	}
 }
 
-float Image::Get_PosX()
+float Image::Get_PosX(const char* keyname)
 {
-	return pos.x;
+	return spriteList[keyname]->pos.x;
 }
 
-float Image::Get_PosY()
+float Image::Get_PosY(const char* keyname)
 {
-	return pos.y;
+	return spriteList[keyname]->pos.y;
 }
 
-int Image::Get_Width()
+int Image::Get_Width(const char* keyname)
 {
-	return width;
+	return spriteList[keyname]->width;
 }
 
-int Image::Get_Height()
+int Image::Get_Height(const char* keyname)
 {
-	return height;
+	return spriteList[keyname]->height;
 }
 
-float Image::Get_Rotate()
+float Image::Get_Rotate(const char* keyname)
 {
-	return rotate;
+	return spriteList[keyname]->rotate;
 }
 
-void Image::Move_Pos(float x, float y)
+void Image::Move_Pos(const char* keyname, float x, float y)
 {
-	pos.x += x;
-	pos.y += y;
+	spriteList[keyname]->pos.x += x;
+	spriteList[keyname]->pos.y += y;
 }
-void Image::Move_Rotate(float Rotate)
+void Image::Move_Rotate(const char* keyname, float Rotate)
 {
-	rotate += Rotate;
+	spriteList[keyname]->rotate += Rotate;
 }
 
-void Image::Set_Divide(unsigned int DivU, unsigned int DivV)
+void Image::Set_Divide(const char* keyname, unsigned int DivU, unsigned int DivV)
 {
 	if (DivU <= 0 || DivV <= 0)
+	{
 		return;
+	}
 
-	divU = DivU;
-	divV = DivV;
+	spriteList[keyname]->divU = DivU;
+	spriteList[keyname]->divV = DivV;
 }
 
-void Image::Set_UVNum(unsigned int NumU, unsigned int NumV)
+void Image::Set_UVNum(const char* keyname, unsigned int NumU, unsigned int NumV)
 {
-	if (NumU >= divU)
+	if (NumU >= spriteList[keyname]->divU)
+	{
 		return;
-	if (NumV >= divV)
+	}
+	if (NumV >= spriteList[keyname]->divV)
+	{
 		return;
+	}
 
-	numU = NumU;
-	numV = NumV;
+	spriteList[keyname]->numU = NumU;
+	spriteList[keyname]->numV = NumV;
 }
 
-void Image::Draw(IDirect3DDevice9* pDevice3D, IDirect3DTexture9* pTexture, bool isTurn)
+void Image::Draw(const char* keyname, IDirect3DDevice9* pDevice3D, bool isTurn)
 {
 	// 頂点情報セット
-	Vertex vtx[4] = {
-		{ (float)width / 2,(float)-height / 2, 0.0f, 1.0f,(isTurn ? (float)numU / divU : (float)(numU + 1) / divU), (float)numV / divV},
-		{ (float)width / 2,(float)height / 2, 0.0f, 1.0f,(isTurn ? (float)numU / divU : (float)(numU + 1) / divU), (float)(numV + 1) / divV},
-		{ (float)-width / 2,(float)-height / 2, 0.0f, 1.0f,(isTurn ? (float)(numU + 1) / divU : (float)numU / divU), (float)numV / divV},
-		{ (float)-width / 2,(float)height / 2, 0.0f, 1.0f,(isTurn ? (float)(numU + 1) / divU : (float)numU / divU), (float)(numV + 1) / divV}
+	Vertex _vtx[4] = {
+		{ (float)spriteList[keyname]->width / 2,(float)-spriteList[keyname]->height / 2, 0.0f, 1.0f,(isTurn ? (float)spriteList[keyname]->numU / spriteList[keyname]->divU : (float)(spriteList[keyname]->numU + 1) / spriteList[keyname]->divU), (float)spriteList[keyname]->numV / spriteList[keyname]->divV},
+		{ (float)spriteList[keyname]->width / 2,(float)spriteList[keyname]->height / 2, 0.0f, 1.0f,(isTurn ? (float)spriteList[keyname]->numU / spriteList[keyname]->divU : (float)(spriteList[keyname]->numU + 1) / spriteList[keyname]->divU), (float)(spriteList[keyname]->numV + 1) / spriteList[keyname]->divV},
+		{ (float)-spriteList[keyname]->width / 2,(float)-spriteList[keyname]->height / 2, 0.0f, 1.0f,(isTurn ? (float)(spriteList[keyname]->numU + 1) / spriteList[keyname]->divU : (float)spriteList[keyname]->numU / spriteList[keyname]->divU), (float)spriteList[keyname]->numV / spriteList[keyname]->divV},
+		{ (float)-spriteList[keyname]->width / 2,(float)spriteList[keyname]->height / 2, 0.0f, 1.0f,(isTurn ? (float)(spriteList[keyname]->numU + 1) / spriteList[keyname]->divU : (float)spriteList[keyname]->numU / spriteList[keyname]->divU), (float)(spriteList[keyname]->numV + 1) / spriteList[keyname]->divV}
 	};
 
 	for (int i = 0; i < 4; ++i) {
-		float x = vtx[i].x * cosf(rotate) - vtx[i].y * sinf(rotate);
-		float y = vtx[i].x * sinf(rotate) + vtx[i].y * cosf(rotate);
-		vtx[i].x = x + pos.x;
-		vtx[i].y = y + pos.y;
+		float x = _vtx[i].x * cosf(spriteList[keyname]->rotate) - _vtx[i].y * sinf(spriteList[keyname]->rotate);
+		float y = _vtx[i].x * sinf(spriteList[keyname]->rotate) + _vtx[i].y * cosf(spriteList[keyname]->rotate);
+		_vtx[i].x = x + spriteList[keyname]->pos.x;
+		_vtx[i].y = y + spriteList[keyname]->pos.y;
 	}
-	// テクスチャセット
-	pDevice3D->SetTexture(0, pTexture);
+
+	pDevice3D->SetTexture(0, textureList[keyname]);
 	// 頂点構造体宣言セット
 	pDevice3D->SetFVF(SPRITE_FVF);
 	// スプライト描画
-	pDevice3D->DrawPrimitiveUP(D3DPT_TRIANGLESTRIP, 2, vtx, sizeof(Vertex));
+	pDevice3D->DrawPrimitiveUP(D3DPT_TRIANGLESTRIP, 2, _vtx, sizeof(Vertex));
 }
 
 
@@ -225,16 +267,17 @@ bool TestOBBOBB(const OBB& obb1, const OBB& obb2)
 	return true;
 }
 
-bool IsHit(const Image& image1, const Image& image2)
+bool IsHit(const char* keyname)
 {
+	Image* image = new Image();
 	OBB obb1;
 	OBB obb2;
 	D3DXMATRIX rotMtx1;
 	D3DXMATRIX rotMtx2;
 
-	D3DXMatrixRotationZ(&rotMtx1, image1.rotate);
-	D3DXMatrixRotationZ(&rotMtx2, image2.rotate);
-	CreateOBB(&obb1, image1.pos, rotMtx1, D3DXVECTOR2(image1.width / 2.0f, image1.height / 2.0f));
-	CreateOBB(&obb2, image2.pos, rotMtx2, D3DXVECTOR2(image2.width / 2.0f, image2.height / 2.0f));
+	D3DXMatrixRotationZ(&rotMtx1, image->spriteList[keyname]->rotate);
+	D3DXMatrixRotationZ(&rotMtx2, image->spriteList[keyname]->rotate);
+	CreateOBB(&obb1, image->spriteList[keyname]->pos, rotMtx1, D3DXVECTOR2(image->spriteList[keyname]->width / 2.0f, image->spriteList[keyname]->height / 2.0f));
+	CreateOBB(&obb2, image->spriteList[keyname]->pos, rotMtx2, D3DXVECTOR2(image->spriteList[keyname]->width / 2.0f, image->spriteList[keyname]->height / 2.0f));
 	return TestOBBOBB(obb1, obb2);
 }
