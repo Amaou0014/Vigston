@@ -4,6 +4,7 @@ Vigston::Vigston()
 {
 	sound = new Sound();
 	image = new Image();
+	text = new Text();
 }
 
 Vigston::~Vigston()
@@ -156,16 +157,16 @@ long Vigston::Get_Volume(const char* keyname)
 	return sound->GetVolume(keyname);
 }
 
-bool Vigston::Create_Font(int size, Text* text)
+bool Vigston::Create_Font(int size)
 {
 	return text->Create(direct3d.pDevice3D, size);
 }
 
-void Vigston::Draw_Font(int x, int y, DWORD color, Text* text, const TCHAR* str...)
+void Vigston::Draw_Font(int x, int y, DWORD color, const TCHAR* str...)
 {
 	va_list args;
 	va_start(args, str);   // ‰Â•Ïˆø”‚ÌÅ‰‚Ì—v‘f‚ðŠi”[‚·‚é
-	text->Draw(x,y, color, str, args);
+	text->Draw(x, y, color, str, args);
 }
 
 void Vigston::GetKeyState()
