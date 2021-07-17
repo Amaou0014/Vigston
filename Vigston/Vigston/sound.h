@@ -11,13 +11,15 @@
 #include <dsound.h>
 #include <tchar.h>
 
+// サウンドクラス
 class Sound
 {
 public:
+	// Waveデータの構造体
 	struct Wave
 	{
 		WAVEFORMATEX		WaveFormat;	// Waveフォーマット
-		byte* WaveData;	// 音の生データ
+		byte*				WaveData;	// 音の生データ
 		int					DataSize;	// データサイズ
 	};
 
@@ -28,7 +30,9 @@ public:
 	Wave* wave;  // Waveファイルのデータ
 
 
+	// コンストラクタ
 	Sound();
+	// デストラクタ
 	~Sound();
 
 	// サウンドデバイス初期化

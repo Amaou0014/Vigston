@@ -2,19 +2,18 @@
 #define  _CRT_NON_CONFORMING_SWPRINTFS
 #include "text.h"
 
-// コンストラクタ
+
 Text::Text()
 {
 	info = new Info();
 }
 
-// デストラクタ
 Text::~Text()
 {
 	delete info;
 }
 
-// DirectXフォント作成
+
 bool Text::Create(IDirect3DDevice9* pD3DDevice, int size)
 {
 	HFONT	hFont = NULL;	// フォントハンドル

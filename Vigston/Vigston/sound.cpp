@@ -11,9 +11,9 @@ Sound::Sound()
 
 Sound::~Sound()
 {
-	Release_SoundDevice();
 	Release_Wave();
 	Release_Buffer();
+	Release_SoundDevice();
 }
 
 void Sound::Init_SoundDevice()
