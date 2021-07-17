@@ -2,14 +2,22 @@
 
 Vigston::Vigston()
 {
+	direct3d = new Direct3D();
 	sound = new Sound();
 	image = new Image();
 	text = new Text();
+	device = new Device();
+	window = new Window();
 }
 
 Vigston::~Vigston()
 {
-
+	delete direct3d;
+	delete sound;
+	delete image;
+	delete text;
+	delete device;
+	delete window;
 }
 
 void Vigston::Init()
@@ -17,32 +25,32 @@ void Vigston::Init()
 	Set_Window(_T("BASIC_WINDOW"));
 	Create_Window(_T("VigstonApp"), WS_OVERLAPPEDWINDOW | WS_VISIBLE, nullptr, nullptr);
 	// Direct3Dì¬
-	direct3d.Create(window.hwnd, window.w, window.h);
+	direct3d->Create(window->hwnd, window->w, window->h);
 	// DirectSoundì¬
-	sound->Create_SoundDevice(window.hwnd);
+	sound->Create_SoundDevice(window->hwnd);
 	// «ŠeƒvƒƒOƒ‰ƒ€‚Ì‰Šú‰»‚ð“®‚©‚·«
 }
 
 void Vigston::Set_Window(const TCHAR* name)
 {
-	window.Set_Window(name);
+	window->Set_Window(name);
 }
 
 void Vigston::Set_Window_Pos(int x, int y)
 {
-	window.x = x;
-	window.y = y;
+	window->x = x;
+	window->y = y;
 }
 
 void Vigston::Set_Window_Size(int w, int h)
 {
-	window.w = w;
-	window.h = h;
+	window->w = w;
+	window->h = h;
 }
 
 void Vigston::Create_Window(LPCTSTR name, DWORD dwStyle,HWND hWndParent, HMENU hMenu)
 {
-	window.Create_Window(name, dwStyle, hWndParent, hMenu);
+	window->Create_Window(name, dwStyle, hWndParent, hMenu);
 }
 
 bool Vigston::GameQuit()
@@ -76,34 +84,34 @@ void Vigston::Set_BackColor(unsigned int color)
 
 void Vigston::Clear_Screen()
 {
-	direct3d.pDevice3D->Clear(0, NULL, D3DCLEAR_TARGET | D3DCLEAR_STENCIL | D3DCLEAR_ZBUFFER, backColor, 1.0f, 0);
+	direct3d->pDevice3D->Clear(0, NULL, D3DCLEAR_TARGET | D3DCLEAR_STENCIL | D3DCLEAR_ZBUFFER, backColor, 1.0f, 0);
 }
 
 bool Vigston::Begine_Scene()
 {
-	return SUCCEEDED(direct3d.pDevice3D->BeginScene());
+	return SUCCEEDED(direct3d->pDevice3D->BeginScene());
 }
 
 bool Vigston::End_Scene()
 {
-	return SUCCEEDED(direct3d.pDevice3D->EndScene());
+	return SUCCEEDED(direct3d->pDevice3D->EndScene());
 }
 
 void Vigston::ScreenFlip()
 {
-	direct3d.pDevice3D->Present(NULL, NULL, NULL, NULL);
+	direct3d->pDevice3D->Present(NULL, NULL, NULL, NULL);
 }
 
 
 bool Vigston::Load_Image(const char* keyname, TCHAR* _name)
 {
-	return image->Load(keyname, direct3d.pDevice3D, _name);
+	return image->Load(keyname, direct3d->pDevice3D, _name);
 }
 
 void Vigston::Set_Image(const char* keyname, float x, float y, int width, int height, float rotate)
 {
 	image->Set_Pos(keyname, x, y);
-	image->Set_Width(keyname, width, height);
+	image->Set_Size(keyname, width, height);
 	image->Set_Rotate(keyname, rotate);
 }
 
@@ -125,8 +133,8 @@ float Vigston::Get_Image_PosY(const char* keyname)
 
 void Vigston::Draw_Image(const char* keyname, bool isTurn)
 {
-	image->SetRenderState(direct3d.pDevice3D, image->RENDER_ALPHATEST);
-	image->Draw(keyname, direct3d.pDevice3D, isTurn);
+	image->SetRenderState(direct3d->pDevice3D, image->RENDER_ALPHATEST);
+	image->Draw(keyname, direct3d->pDevice3D, isTurn);
 }
 
 bool Vigston::Load_Sound(const char* keyname, TCHAR* name)
@@ -159,7 +167,7 @@ long Vigston::Get_Volume(const char* keyname)
 
 bool Vigston::Create_Font(int size)
 {
-	return text->Create(direct3d.pDevice3D, size);
+	return text->Create(direct3d->pDevice3D, size);
 }
 
 void Vigston::Draw_Font(int x, int y, DWORD color, const TCHAR* str...)
@@ -171,35 +179,35 @@ void Vigston::Draw_Font(int x, int y, DWORD color, const TCHAR* str...)
 
 void Vigston::GetKeyState()
 {
-	device.GetKeyState();
+	device->GetKeyState();
 }
 
 bool Vigston::GetKey(unsigned char keycode)
 {
-	return device.GetKey(keycode);
+	return device->GetKey(keycode);
 }
 
 bool Vigston::PushKey(unsigned char keycode)
 {
-	return device.PushKey(keycode);
+	return device->PushKey(keycode);
 }
 
 bool Vigston::ReleaseKey(unsigned char keycode)
 {
-	return device.ReleaseKey(keycode);
+	return device->ReleaseKey(keycode);
 }
 
 void Vigston::GetMouseState()
 {
-	device.GetMouseState();
+	device->GetMouseState();
 }
 
 int Vigston::GetMouseX()
 {
-	return device.GetMouseX();
+	return device->GetMouseX();
 }
 
 int Vigston::GetMouseY()
 {
-	return device.GetMouseY();
+	return device->GetMouseY();
 }

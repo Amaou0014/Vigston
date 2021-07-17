@@ -8,25 +8,28 @@
 #include "window.h"
 
 
+// ライブラリの基本クラス
+// このクラス内のメソッドを使ってプログラムを行ってもらう
 class Vigston
 {
 public:
-	Direct3D	direct3d;
+	//各クラスオブジェクトポインタ
+	Direct3D*	direct3d;
 	Sound* sound;
 	Image* image;
 	Text* text;
+	Device* device;
+	Window* window;
 
-	Window window;
-
+	// ウィンドウのメッセージ情報
 	MSG msg = {};
 
-	Device device;
-
-	bool flag = false;
-
+	// ウィンドウの背景色
 	DWORD backColor;
 
+	// コンストラクタ
 	Vigston();
+	// デストラクタ
 	~Vigston();
 
 	//この関数の中に処理を書いてね

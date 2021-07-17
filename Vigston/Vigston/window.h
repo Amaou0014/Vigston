@@ -2,23 +2,28 @@
 
 #include <windows.h>
 
+// ウィンドウクラス
 class Window
 {
+    // ウィンドウの名前を格納する配列
     TCHAR WINDOW_CLASS_NAME[1024];
 
+    // ウィンドウメッセージを処理
     static LRESULT CALLBACK StaticWndProc(
         HWND hwnd,
         UINT msg,
         WPARAM wp,
         LPARAM lp);
 public:
-    HWND hwnd;
-    int x;
-    int y;
-    int w;
-    int h;
+    HWND hwnd;         // ウィンドウオブジェクト
+    int x;             // ウィンドウのX座標
+    int y;             // ウィンドウのY座標
+    int w;             // ウィンドウの横幅
+    int h;             // ウィンドウの縦幅
 public:
+    // コンストラクタ
     Window();
+    // デストラクタ
     virtual ~Window();
 
     // ウィンドウ初期化
@@ -42,6 +47,7 @@ public:
     // ウィンドウプロシージャ
     virtual LRESULT WndProc(HWND hwnd, UINT msg, WPARAM wp, LPARAM lp);
 
+    // ウィンドウオブジェクト取得
     HWND GetHWND()const { return hwnd; }
 
     // ウィンドウ作成

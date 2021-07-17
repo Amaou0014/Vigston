@@ -11,20 +11,23 @@
 class Text
 {
 private:
+	// テキスト情報の構造体
 	struct Info
 	{
 		ID3DXFont* pFont;  // Direct3Dフォント
 		RECT				Rect;  // 描画領域
 		std::vector<TCHAR>	 Buf;  // 文字列バッファ
 	};
-
+	// テキスト情報の構造体のポインタ
 	Info* info;
 public:
 
+	// コンストラクタ
 	Text();
+	// デストラクタ
 	virtual ~Text();
 
-	// DirectXフォント作成
+	// フォント作成
 	bool Create(IDirect3DDevice9* pD3DDevice, int size = 16);
 
 	// 文字列の描画

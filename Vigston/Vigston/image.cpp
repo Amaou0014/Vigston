@@ -75,7 +75,7 @@ void Image::Set_Pos(const char* keyname, float x, float y)
 	spriteList[keyname]->pos.x = x;
 	spriteList[keyname]->pos.y = y;
 }
-void Image::Set_Width(const char* keyname, int Width, int Height)
+void Image::Set_Size(const char* keyname, int Width, int Height)
 {
 	spriteList[keyname]->width = Width;
 	spriteList[keyname]->height = Height;
@@ -228,7 +228,6 @@ float LenSegOnSeparateAxis(D3DXVECTOR2* Sep, D3DXVECTOR2* e1, D3DXVECTOR2* e2)
 bool TestOBBOBB(const OBB& obb1, const OBB& obb2)
 {
 	// 各方向ベクトルの確保
-	// （N***:標準化方向ベクトル）
 	D3DXVECTOR2 NAe1 = obb1.Dir[0], Ae1 = NAe1 * obb1.Length[0];
 	D3DXVECTOR2 NAe2 = obb1.Dir[1], Ae2 = NAe2 * obb1.Length[1];
 	D3DXVECTOR2 NBe1 = obb2.Dir[0], Be1 = NBe1 * obb2.Length[0];
