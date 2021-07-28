@@ -103,9 +103,9 @@ void Vigston::ScreenFlip()
 }
 
 
-bool Vigston::Load_Image(const char* keyname, TCHAR* _name)
+bool Vigston::Load_Image(const char* keyname, TCHAR* _name, float x, float y, int width, int height, float rotate)
 {
-	return image->Load(keyname, direct3d->pDevice3D, _name);
+	return image->Load(keyname, direct3d->pDevice3D, _name, x, y, width, height, rotate);
 }
 
 void Vigston::Set_Image(const char* keyname, float x, float y, int width, int height, float rotate)

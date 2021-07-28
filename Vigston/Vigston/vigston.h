@@ -9,7 +9,7 @@
 
 
 // ライブラリの基本クラス
-// このクラス内のメソッドを使ってプログラムを行ってもらう
+// このクラス内のメソッドを使ってもらう
 class Vigston
 {
 public:
@@ -66,7 +66,9 @@ public:
 	void ScreenFlip();
 
 	// 画像読み込み
-	bool Load_Image(const char* keyname, TCHAR* name);
+	bool Load_Image(const char* keyname, TCHAR* name, float x, float y, int width, int height, float rotate);
+	// 画像を分割して読み込み
+	bool LoadDiv_Image(const char* keyname, TCHAR* name, float x, float y, int width, int height, float rotate, unsigned int DivU, unsigned int DivV);
 	// 描画位置セット
 	void Set_Image(const char* keyname, float x, float y, int width, int height, float rotate);
 	// 描画位置を動かす

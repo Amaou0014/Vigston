@@ -1,4 +1,12 @@
-﻿  main.cpp
+﻿  engine.cpp
+  image.cpp
+C:\Users\toydo\OneDrive\ドキュメント\GitHub\Vigston\Vigston\Vigston\image.cpp(285,11): warning C4244: '初期化中': 'double' から 'float' への変換です。データが失われる可能性があります。
+C:\Users\toydo\OneDrive\ドキュメント\GitHub\Vigston\Vigston\Vigston\image.cpp(286,11): warning C4244: '初期化中': 'double' から 'float' への変換です。データが失われる可能性があります。
+C:\Users\toydo\OneDrive\ドキュメント\GitHub\Vigston\Vigston\Vigston\image.cpp(303,10): warning C4244: '初期化中': 'double' から 'float' への変換です。データが失われる可能性があります。
+C:\Users\toydo\OneDrive\ドキュメント\GitHub\Vigston\Vigston\Vigston\image.cpp(310,10): warning C4244: '=': 'double' から 'float' への変換です。データが失われる可能性があります。
+C:\Users\toydo\OneDrive\ドキュメント\GitHub\Vigston\Vigston\Vigston\image.cpp(317,10): warning C4244: '=': 'double' から 'float' への変換です。データが失われる可能性があります。
+C:\Users\toydo\OneDrive\ドキュメント\GitHub\Vigston\Vigston\Vigston\image.cpp(324,10): warning C4244: '=': 'double' から 'float' への変換です。データが失われる可能性があります。
+  main.cpp
 C:\Users\toydo\OneDrive\ドキュメント\GitHub\Vigston\Vigston\Vigston\main.cpp(5,5): warning C4007: 'WinMain': '__stdcall' でなければなりません。
   vigston.cpp
   コードを生成中...
