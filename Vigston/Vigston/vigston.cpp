@@ -108,6 +108,11 @@ bool Vigston::Load_Image(const char* keyname, TCHAR* _name, float x, float y, in
 	return image->Load(keyname, direct3d->pDevice3D, _name, x, y, width, height, rotate);
 }
 
+bool Vigston::LoadDiv_Image(const char* keyname, TCHAR* name, float x, float y, int width, int height, float rotate, unsigned int DivU, unsigned int DivV)
+{
+	return image->LoadDiv_Image(keyname,direct3d->pDevice3D, name, x, y, width, height, rotate, DivU, DivV);
+}
+
 void Vigston::Set_Image(const char* keyname, float x, float y, int width, int height, float rotate)
 {
 	image->Set_Pos(keyname, x, y);
@@ -135,6 +140,11 @@ void Vigston::Draw_Image(const char* keyname, bool isTurn)
 {
 	image->SetRenderState(direct3d->pDevice3D, image->RENDER_ALPHATEST);
 	image->Draw(keyname, direct3d->pDevice3D, isTurn);
+}
+
+void Vigston::DrawDiv_Image(const char* keyname, unsigned int NumU, unsigned int NumV, bool isTurn)
+{
+	image->DrawDiv(keyname, direct3d->pDevice3D, NumU, NumV, isTurn);
 }
 
 bool Vigston::Load_Sound(const char* keyname, TCHAR* name)

@@ -79,6 +79,8 @@ public:
 	float Get_Image_PosY(const char* keyname);
 	// •`‰æ‚·‚é
 	void Draw_Image(const char* keyname, bool isTurn = false);
+	// •ªŠ„‚³‚ê‚½‰æ‘œ•`‰æ
+	void DrawDiv_Image(const char* keyname, unsigned int NumU, unsigned int NumV, bool isTurn = false);
 
 	// ‰¹º“Ç‚İ‚İ
 	bool Load_Sound(const char* keyname, TCHAR* name);
