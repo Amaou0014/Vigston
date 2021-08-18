@@ -6,11 +6,27 @@ int WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int n
 {
 	Vigston* vigston = new Vigston();
 
+	Animation* anim = new Animation[12]
+	{
+		{0,0},// ƒRƒ}‚P
+		{1,0},// ƒRƒ}‚Q
+		{2,0},// ƒRƒ}‚R
+		{2,1},// ƒRƒ}‚S
+		{1,1},// ƒRƒ}‚T
+		{0,1},// ƒRƒ}‚U
+		{0,2},// ƒRƒ}‚V
+		{1,2},// ƒRƒ}‚W
+		{2,2},// ƒRƒ}‚X
+		{2,3},// ƒRƒ}‚P‚O
+		{1,3},// ƒRƒ}‚P‚P
+		{0,3},// ƒRƒ}‚P‚Q
+	};
+
 	vigston->Init();
 
 	vigston->Load_Sound("SE1",(TCHAR*)_T("Resources/maou_retoro_1.wav"));
-	vigston->Load_Image("Slime",(TCHAR*)_T("Resources/Slime.png"));
-	vigston->Set_Image("Slime", 100, 100, 128, 128, 0);
+	vigston->Load_Image("Slime",(TCHAR*)_T("Resources/Slime.png"), 100, 100, 128, 128, 0);
+	vigston->LoadDiv_Image("AirShip", (TCHAR*)_T("Resources/pipo-airship_1.png"), 200, 200, 64, 64, 0, 3, 4);
 	vigston->Create_Font(32);
 
 	while (!vigston->GameQuit())
@@ -80,8 +96,10 @@ int WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int n
 
 				// •`‰æˆ—
 				vigston->Draw_Image("Slime");
+				vigston->DrawDiv_Image("AirShip", anim, 10);
 				vigston->Draw_Font(0, 0, 0xffff0000, _T("x = %.1f\ny = %.1f"), vigston->Get_Image_PosX("Slime"), vigston->Get_Image_PosY("Slime"));
 				vigston->Draw_Font(200, 0, 0xffff0000, _T("x = %d\ny = %d"), vigston->GetMouseX(), vigston->GetMouseY());
+
 				// ƒŒƒ“ƒ_ƒŠƒ“ƒOI—¹
 				vigston->End_Scene();
 			}

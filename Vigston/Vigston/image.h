@@ -5,7 +5,7 @@
 #include <map>
 
 // 読み込んだ画像のナンバー
-struct AnimationNum {
+struct Animation {
 	unsigned int numU;
 	unsigned int numV;
 };
@@ -63,13 +63,13 @@ public:
 	~Image();
 
 	// 画像データ読み込み
-	bool Load(const char* keyname, IDirect3DDevice9* pDevice3D, TCHAR* FileName);
+	bool Load(const char* keyname, IDirect3DDevice9* pDevice3D, TCHAR* FileName, float x, float y, int width, int height, float rotate);
 	// 画像描画の座標セット
 	void Set_Pos(const char* keyname, float x, float y);
 	// 画像描画のサイズセット
-	void Set_Size(const char* keyname, int Width, int Height);
+	void Set_Size(const char* keyname, int width, int height);
 	// 画像描画の角度セット
-	void Set_Rotate(const char* keyname, float Rotate);
+	void Set_Rotate(const char* keyname, float rotate);
 
 	// 画像の透過範囲を透過
 	void SetRenderState(IDirect3DDevice9* pD3DDevice, RENDERSTATE RenderState);
@@ -90,12 +90,17 @@ public:
 	// 画像描画の角度変更
 	void Move_Rotate(const char* keyname, float Rotate);
 
+	// 画像を分割して読み込む
+	bool LoadDiv_Image(const char* keyname, IDirect3DDevice9* pDevice3D, TCHAR* FileName, float x, float y, int width, int height, float rotate, unsigned int DivU, unsigned int DivV);
 	// 画像を分割して保存 ＊マップチップなどに使う
 	void Set_Divide(const char* keyname, unsigned int DivU, unsigned int DivV);
 	// 画像を分割して保存した画像を並べる
 	void Set_UVNum(const char* keyname, unsigned int NumU, unsigned int NumV);
+
 	// 指定されたキーで保存されている画像を描画
 	void Draw(const char* keyname, IDirect3DDevice9* pDevice3D, bool isTurn = false);
+	// 指定されたキーで保存されている分割された画像を描画
+	void DrawDiv(const char* keyname, IDirect3DDevice9* pDevice3D, unsigned int NumU, unsigned int NumV, bool isTurn = false);
 };
 
 // スプライトの当たり判定

@@ -42,7 +42,7 @@ Image::~Image()
 
 	spriteList.clear();
 }
-bool Image::Load(const char* keyname, IDirect3DDevice9* pDevice3D, TCHAR* FileName)
+bool Image::Load(const char* keyname, IDirect3DDevice9* pDevice3D, TCHAR* FileName, float x, float y, int width, int height, float rotate)
 {
 	if (spriteList[keyname] == NULL)
 	{
@@ -66,6 +66,10 @@ bool Image::Load(const char* keyname, IDirect3DDevice9* pDevice3D, TCHAR* FileNa
 	else
 	{
 		// 成功
+		Set_Pos(keyname, x, y);
+		Set_Size(keyname, width, height);
+		Set_Rotate(keyname, rotate);
+
 		return true;
 	}
 }
@@ -75,15 +79,15 @@ void Image::Set_Pos(const char* keyname, float x, float y)
 	spriteList[keyname]->pos.x = x;
 	spriteList[keyname]->pos.y = y;
 }
-void Image::Set_Size(const char* keyname, int Width, int Height)
+void Image::Set_Size(const char* keyname, int width, int height)
 {
-	spriteList[keyname]->width = Width;
-	spriteList[keyname]->height = Height;
+	spriteList[keyname]->width = width;
+	spriteList[keyname]->height = height;
 }
 
-void Image::Set_Rotate(const char* keyname, float Rotate)
+void Image::Set_Rotate(const char* keyname, float rotate)
 {
-	spriteList[keyname]->rotate = Rotate;
+	spriteList[keyname]->rotate = rotate;
 }
 
 void Image::SetRenderState(IDirect3DDevice9* pD3DDevice, RENDERSTATE RenderState)
@@ -143,6 +147,40 @@ void Image::Move_Rotate(const char* keyname, float Rotate)
 	spriteList[keyname]->rotate += Rotate;
 }
 
+bool Image::LoadDiv_Image(const char* keyname, IDirect3DDevice9* pDevice3D, TCHAR* FileName, float x, float y, int width, int height, float rotate, unsigned int DivU, unsigned int DivV)
+{
+	if (spriteList[keyname] == NULL)
+	{
+		spriteList[keyname] = new Sprite();
+
+		spriteList[keyname]->pos.x = 0.0f;
+		spriteList[keyname]->pos.y = 0.0f;
+		spriteList[keyname]->width = 0;
+		spriteList[keyname]->height = 0;
+		spriteList[keyname]->divU = 1;
+		spriteList[keyname]->divV = 1;
+		spriteList[keyname]->numU = 0;
+		spriteList[keyname]->numV = 0;
+		spriteList[keyname]->rotate = 0.0f;
+	}
+	// 画像読み込み
+	if (FAILED(D3DXCreateTextureFromFile(pDevice3D, FileName, &textureList[keyname])))
+	{
+		return false;	// 失敗
+	}
+	else
+	{
+		// 成功
+		Set_Pos(keyname, x, y);
+		Set_Size(keyname, width, height);
+		Set_Rotate(keyname, rotate);
+
+		Set_Divide(keyname, DivU, DivV);
+
+		return true;
+	}
+}
+
 void Image::Set_Divide(const char* keyname, unsigned int DivU, unsigned int DivV)
 {
 	if (DivU <= 0 || DivV <= 0)
@@ -193,6 +231,32 @@ void Image::Draw(const char* keyname, IDirect3DDevice9* pDevice3D, bool isTurn)
 	pDevice3D->DrawPrimitiveUP(D3DPT_TRIANGLESTRIP, 2, _vtx, sizeof(Vertex));
 }
 
+void Image::DrawDiv(const char* keyname, IDirect3DDevice9* pDevice3D, unsigned int NumU, unsigned int NumV, bool isTurn)
+{
+	Set_UVNum(keyname, NumU, NumV);
+
+	// 頂点情報セット
+	Vertex _vtx[4] = {
+		{ (float)spriteList[keyname]->width / 2,(float)-spriteList[keyname]->height / 2, 0.0f, 1.0f,(isTurn ? (float)spriteList[keyname]->numU / spriteList[keyname]->divU : (float)(spriteList[keyname]->numU + 1) / spriteList[keyname]->divU), (float)spriteList[keyname]->numV / spriteList[keyname]->divV},
+		{ (float)spriteList[keyname]->width / 2,(float)spriteList[keyname]->height / 2, 0.0f, 1.0f,(isTurn ? (float)spriteList[keyname]->numU / spriteList[keyname]->divU : (float)(spriteList[keyname]->numU + 1) / spriteList[keyname]->divU), (float)(spriteList[keyname]->numV + 1) / spriteList[keyname]->divV},
+		{ (float)-spriteList[keyname]->width / 2,(float)-spriteList[keyname]->height / 2, 0.0f, 1.0f,(isTurn ? (float)(spriteList[keyname]->numU + 1) / spriteList[keyname]->divU : (float)spriteList[keyname]->numU / spriteList[keyname]->divU), (float)spriteList[keyname]->numV / spriteList[keyname]->divV},
+		{ (float)-spriteList[keyname]->width / 2,(float)spriteList[keyname]->height / 2, 0.0f, 1.0f,(isTurn ? (float)(spriteList[keyname]->numU + 1) / spriteList[keyname]->divU : (float)spriteList[keyname]->numU / spriteList[keyname]->divU), (float)(spriteList[keyname]->numV + 1) / spriteList[keyname]->divV}
+	};
+
+	for (int i = 0; i < 4; ++i) {
+		float x = _vtx[i].x * cosf(spriteList[keyname]->rotate) - _vtx[i].y * sinf(spriteList[keyname]->rotate);
+		float y = _vtx[i].x * sinf(spriteList[keyname]->rotate) + _vtx[i].y * cosf(spriteList[keyname]->rotate);
+		_vtx[i].x = x + spriteList[keyname]->pos.x;
+		_vtx[i].y = y + spriteList[keyname]->pos.y;
+	}
+
+	// テクスチャセット
+	pDevice3D->SetTexture(0, textureList[keyname]);
+	// 頂点構造体宣言セット
+	pDevice3D->SetFVF(SPRITE_FVF);
+	// スプライト描画
+	pDevice3D->DrawPrimitiveUP(D3DPT_TRIANGLESTRIP, 2, _vtx, sizeof(Vertex));
+}
 
 // 有向境界ボックス（２次元）
 struct OBB

@@ -9,7 +9,7 @@
 
 
 // ライブラリの基本クラス
-// このクラス内のメソッドを使ってプログラムを行ってもらう
+// このクラス内のメソッドを使ってもらう
 class Vigston
 {
 public:
@@ -20,6 +20,9 @@ public:
 	Text* text;
 	Device* device;
 	Window* window;
+
+	// フレーム数
+	unsigned long frame;
 
 	// ウィンドウのメッセージ情報
 	MSG msg = {};
@@ -66,7 +69,9 @@ public:
 	void ScreenFlip();
 
 	// 画像読み込み
-	bool Load_Image(const char* keyname, TCHAR* name);
+	bool Load_Image(const char* keyname, TCHAR* name, float x, float y, int width, int height, float rotate);
+	// 画像を分割して読み込み
+	bool LoadDiv_Image(const char* keyname, TCHAR* name, float x, float y, int width, int height, float rotate, unsigned int DivU, unsigned int DivV);
 	// 描画位置セット
 	void Set_Image(const char* keyname, float x, float y, int width, int height, float rotate);
 	// 描画位置を動かす
@@ -77,6 +82,8 @@ public:
 	float Get_Image_PosY(const char* keyname);
 	// 描画する
 	void Draw_Image(const char* keyname, bool isTurn = false);
+	// 分割された画像描画
+	void DrawDiv_Image(const char* keyname, Animation* anim,int speed = 1, bool isTurn = false);
 
 	// 音声読み込み
 	bool Load_Sound(const char* keyname, TCHAR* name);
