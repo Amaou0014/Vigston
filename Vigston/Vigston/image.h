@@ -5,7 +5,7 @@
 #include <map>
 
 // “Ç‚İ‚ñ‚¾‰æ‘œ‚Ìƒiƒ“ƒo[
-struct AnimationNum {
+struct Animation {
 	unsigned int numU;
 	unsigned int numV;
 };

@@ -250,6 +250,7 @@ void Image::DrawDiv(const char* keyname, IDirect3DDevice9* pDevice3D, unsigned i
 		_vtx[i].y = y + spriteList[keyname]->pos.y;
 	}
 
+	// テクスチャセット
 	pDevice3D->SetTexture(0, textureList[keyname]);
 	// 頂点構造体宣言セット
 	pDevice3D->SetFVF(SPRITE_FVF);

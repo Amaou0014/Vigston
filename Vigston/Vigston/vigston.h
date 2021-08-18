@@ -21,6 +21,9 @@ public:
 	Device* device;
 	Window* window;
 
+	// フレーム数
+	unsigned long frame;
+
 	// ウィンドウのメッセージ情報
 	MSG msg = {};
 
@@ -80,7 +83,7 @@ public:
 	// 描画する
 	void Draw_Image(const char* keyname, bool isTurn = false);
 	// 分割された画像描画
-	void DrawDiv_Image(const char* keyname, unsigned int NumU, unsigned int NumV, bool isTurn = false);
+	void DrawDiv_Image(const char* keyname, Animation* anim,int speed = 1, bool isTurn = false);
 
 	// 音声読み込み
 	bool Load_Sound(const char* keyname, TCHAR* name);

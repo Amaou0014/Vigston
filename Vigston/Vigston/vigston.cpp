@@ -8,6 +8,8 @@ Vigston::Vigston()
 	text = new Text();
 	device = new Device();
 	window = new Window();
+
+	frame = 0;
 }
 
 Vigston::~Vigston()
@@ -94,6 +96,9 @@ bool Vigston::Begine_Scene()
 
 bool Vigston::End_Scene()
 {
+	// ƒtƒŒ[ƒ€‚ði‚ß‚é
+	frame++;
+
 	return SUCCEEDED(direct3d->pDevice3D->EndScene());
 }
 
@@ -142,9 +147,11 @@ void Vigston::Draw_Image(const char* keyname, bool isTurn)
 	image->Draw(keyname, direct3d->pDevice3D, isTurn);
 }
 
-void Vigston::DrawDiv_Image(const char* keyname, unsigned int NumU, unsigned int NumV, bool isTurn)
+void Vigston::DrawDiv_Image(const char* keyname, Animation* anim, int speed, bool isTurn)
 {
-	image->DrawDiv(keyname, direct3d->pDevice3D, NumU, NumV, isTurn);
+	int divNum = image->spriteList[keyname]->divU * image->spriteList[keyname]->divV;
+
+	image->DrawDiv(keyname, direct3d->pDevice3D, anim[(frame / speed) % divNum].numU, anim[(frame / speed) % divNum].numV, isTurn);
 }
 
 bool Vigston::Load_Sound(const char* keyname, TCHAR* name)

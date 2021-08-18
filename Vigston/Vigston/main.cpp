@@ -6,9 +6,7 @@ int WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int n
 {
 	Vigston* vigston = new Vigston();
 
-	unsigned long frame = 0; // フレーム数
-
-	AnimationNum anim[12] =
+	Animation* anim = new Animation[12]
 	{
 		{0,0},// コマ１
 		{1,0},// コマ２
@@ -28,7 +26,6 @@ int WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int n
 
 	vigston->Load_Sound("SE1",(TCHAR*)_T("Resources/maou_retoro_1.wav"));
 	vigston->Load_Image("Slime",(TCHAR*)_T("Resources/Slime.png"), 100, 100, 128, 128, 0);
-	//vigston->Load_Image("AirShip", (TCHAR*)_T("Resources/pipo-airship_1.png"), 200, 200, 64, 64, 0);
 	vigston->LoadDiv_Image("AirShip", (TCHAR*)_T("Resources/pipo-airship_1.png"), 200, 200, 64, 64, 0, 3, 4);
 	vigston->Create_Font(32);
 
@@ -99,12 +96,10 @@ int WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int n
 
 				// 描画処理
 				vigston->Draw_Image("Slime");
-				//vigston->Draw_Image("AirShip");
-				vigston->DrawDiv_Image("AirShip", anim[(frame) % 12].numU, anim[(frame) % 12].numV);
+				vigston->DrawDiv_Image("AirShip", anim, 10);
 				vigston->Draw_Font(0, 0, 0xffff0000, _T("x = %.1f\ny = %.1f"), vigston->Get_Image_PosX("Slime"), vigston->Get_Image_PosY("Slime"));
 				vigston->Draw_Font(200, 0, 0xffff0000, _T("x = %d\ny = %d"), vigston->GetMouseX(), vigston->GetMouseY());
 
-				frame++;
 				// レンダリング終了
 				vigston->End_Scene();
 			}
