@@ -99,8 +99,6 @@ public:
 
 	// 指定されたキーで保存されている画像を描画
 	void Draw(const char* keyname, IDirect3DDevice9* pDevice3D, bool isTurn = false);
-	// 指定されたキーで保存されている分割された画像を描画
-	void DrawDiv(const char* keyname, IDirect3DDevice9* pDevice3D, unsigned int NumU, unsigned int NumV, bool isTurn = false);
 };
 
 // スプライトの当たり判定

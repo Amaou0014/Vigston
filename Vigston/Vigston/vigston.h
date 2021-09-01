@@ -15,14 +15,11 @@ class Vigston
 public:
 	//各クラスオブジェクトポインタ
 	Direct3D*	direct3d;
-	Sound* sound;
-	Image* image;
-	Text* text;
-	Device* device;
-	Window* window;
-
-	// フレーム数
-	unsigned long frame;
+	Sound*		sound;
+	Image*		image;
+	Text*		text;
+	Device*		device;
+	Window*		window;
 
 	// ウィンドウのメッセージ情報
 	MSG msg = {};
@@ -82,8 +79,6 @@ public:
 	float Get_Image_PosY(const char* keyname);
 	// 描画する
 	void Draw_Image(const char* keyname, bool isTurn = false);
-	// 分割された画像描画
-	void DrawDiv_Image(const char* keyname, Animation* anim,int speed = 1, bool isTurn = false);
 
 	// 音声読み込み
 	bool Load_Sound(const char* keyname, TCHAR* name);
