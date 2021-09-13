@@ -2,6 +2,7 @@
 
 Vigston::Vigston()
 {
+	frame = 0;
 	direct3d	=	new Direct3D();
 	sound		=	new Sound();
 	image		=	new Image();
@@ -100,6 +101,8 @@ bool Vigston::End_Scene()
 void Vigston::ScreenFlip()
 {
 	direct3d->pDevice3D->Present(NULL, NULL, NULL, NULL);
+	// フレーム更新
+	frame++;
 }
 
 
@@ -118,6 +121,17 @@ void Vigston::Set_Image(const char* keyname, float x, float y, int width, int he
 	image->Set_Pos(keyname, x, y);
 	image->Set_Size(keyname, width, height);
 	image->Set_Rotate(keyname, rotate);
+}
+
+void Vigston::SetDiv_Image(const char* keyname, Animation* anim[], int Numframe)
+{
+	unsigned int NumU = 0;
+	unsigned int NumV = 0;
+
+	NumU = anim[(frame) % Numframe]->numU;
+	NumV = anim[(frame) % Numframe]->numV;
+
+	image->Set_UVNum(keyname, NumU, NumV);
 }
 
 void Vigston::Move_Image(const char* keyname, float x, float y, float rotate)

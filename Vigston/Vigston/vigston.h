@@ -21,6 +21,9 @@ public:
 	Device*		device;
 	Window*		window;
 
+	// ゲームフレーム
+	unsigned long frame;
+
 	// ウィンドウのメッセージ情報
 	MSG msg = {};
 
@@ -71,6 +74,8 @@ public:
 	bool LoadDiv_Image(const char* keyname, TCHAR* name, float x, float y, int width, int height, float rotate, unsigned int DivU, unsigned int DivV);
 	// 描画位置セット
 	void Set_Image(const char* keyname, float x, float y, int width, int height, float rotate);
+	// 分割されて保存されてる画像の中から描画する画像をセット
+	void SetDiv_Image(const char* keyname, Animation* anim[], int Numframe);
 	// 描画位置を動かす
 	void Move_Image(const char* keyname, float x, float y, float rotate);
 	// 描画座標X取得

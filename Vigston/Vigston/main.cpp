@@ -6,6 +6,13 @@ int WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int n
 {
 	Vigston* vigston = new Vigston();
 
+	Animation* anim = new Animation[3]
+	{
+		{0,0},// ƒRƒ}‚P
+		{1,0},// ƒRƒ}‚Q
+		{2,0},// ƒRƒ}‚R
+	};
+
 	vigston->Init();
 
 	vigston->Load_Sound("SE1",(TCHAR*)_T("Resources/maou_retoro_1.wav"));
