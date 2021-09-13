@@ -231,33 +231,6 @@ void Image::Draw(const char* keyname, IDirect3DDevice9* pDevice3D, bool isTurn)
 	pDevice3D->DrawPrimitiveUP(D3DPT_TRIANGLESTRIP, 2, _vtx, sizeof(Vertex));
 }
 
-void Image::DrawDiv(const char* keyname, IDirect3DDevice9* pDevice3D, unsigned int NumU, unsigned int NumV, bool isTurn)
-{
-	Set_UVNum(keyname, NumU, NumV);
-
-	// 頂点情報セット
-	Vertex _vtx[4] = {
-		{ (float)spriteList[keyname]->width / 2,(float)-spriteList[keyname]->height / 2, 0.0f, 1.0f,(isTurn ? (float)spriteList[keyname]->numU / spriteList[keyname]->divU : (float)(spriteList[keyname]->numU + 1) / spriteList[keyname]->divU), (float)spriteList[keyname]->numV / spriteList[keyname]->divV},
-		{ (float)spriteList[keyname]->width / 2,(float)spriteList[keyname]->height / 2, 0.0f, 1.0f,(isTurn ? (float)spriteList[keyname]->numU / spriteList[keyname]->divU : (float)(spriteList[keyname]->numU + 1) / spriteList[keyname]->divU), (float)(spriteList[keyname]->numV + 1) / spriteList[keyname]->divV},
-		{ (float)-spriteList[keyname]->width / 2,(float)-spriteList[keyname]->height / 2, 0.0f, 1.0f,(isTurn ? (float)(spriteList[keyname]->numU + 1) / spriteList[keyname]->divU : (float)spriteList[keyname]->numU / spriteList[keyname]->divU), (float)spriteList[keyname]->numV / spriteList[keyname]->divV},
-		{ (float)-spriteList[keyname]->width / 2,(float)spriteList[keyname]->height / 2, 0.0f, 1.0f,(isTurn ? (float)(spriteList[keyname]->numU + 1) / spriteList[keyname]->divU : (float)spriteList[keyname]->numU / spriteList[keyname]->divU), (float)(spriteList[keyname]->numV + 1) / spriteList[keyname]->divV}
-	};
-
-	for (int i = 0; i < 4; ++i) {
-		float x = _vtx[i].x * cosf(spriteList[keyname]->rotate) - _vtx[i].y * sinf(spriteList[keyname]->rotate);
-		float y = _vtx[i].x * sinf(spriteList[keyname]->rotate) + _vtx[i].y * cosf(spriteList[keyname]->rotate);
-		_vtx[i].x = x + spriteList[keyname]->pos.x;
-		_vtx[i].y = y + spriteList[keyname]->pos.y;
-	}
-
-	// テクスチャセット
-	pDevice3D->SetTexture(0, textureList[keyname]);
-	// 頂点構造体宣言セット
-	pDevice3D->SetFVF(SPRITE_FVF);
-	// スプライト描画
-	pDevice3D->DrawPrimitiveUP(D3DPT_TRIANGLESTRIP, 2, _vtx, sizeof(Vertex));
-}
-
 // 有向境界ボックス（２次元）
 struct OBB
 {
